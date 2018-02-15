@@ -2,9 +2,7 @@
 #include <QGraphicsScene>
 #include <QGraphicsView>
 #include "myrect.h"
-#include "enemy.h"
-#include <thread>
-#include <QTimer>
+
 
 int main(int argc, char *argv[])
 {
@@ -29,14 +27,5 @@ int main(int argc, char *argv[])
     view->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     view->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     view->show();
-    view->setFixedSize(800,600);
-    scene->setSceneRect(0,0,800,600);
-    rect->setPos(view->width()/2-rect->rect().width()/2,view->height()-rect->rect().height());
-
-    //generate enemies randomly in a time interval of 3 sec
-    QTimer *timer=new QTimer();
-    QTimer::connect(timer,SIGNAL(timeout()),rect,SLOT(create_enemy()));
-    timer->start(2000);
-
     return a.exec();
 }

@@ -2,39 +2,38 @@
 #include <QKeyEvent>
 #include <QGraphicsScene>
 #include "bullet.h"
+#include <QDebug>
+#include "enemy.h"
 
-bool boost = false;
+bool boost_p = false;
+//int count_p=10;
 
 void MyRect::keyPressEvent(QKeyEvent *keyEvent){
+//    qDebug()<<"player "<<count_p;
     if(keyEvent->key()==Qt::Key_Space){
-        boost=!boost;
+        boost_p=!boost_p;
     }
-    else if(keyEvent->key()==Qt::Key_Left){
-        if(boost==false)
+    else if(keyEvent->key()==Qt::Key_Left && x()>0){
+        if(boost_p==false)
             setPos(x()-10,y());
         else
             setPos(x()-20,y());
     }
-    else if(keyEvent->key()==Qt::Key_Right){
-        if(boost==false)
+    else if(keyEvent->key()==Qt::Key_Right && x()<750){
+        if(boost_p==false)
             setPos(x()+10,y());
         else
             setPos(x()+20,y());
     }
-    else if(keyEvent->key()==Qt::Key_Up){
-        if(boost==false)
-            setPos(x(),y()-10);
-        else
-            setPos(x(),y()-20);
-    }
-    else if(keyEvent->key()==Qt::Key_Down){
-        if(boost==false)
-            setPos(x(),y()+10);
-        else
-            setPos(x(),y()+20);
-    }
-    else if(keyEvent->key()==Qt::Key_Shift){
-        Bullet *bullet = new Bullet(x(),y());
+    else if(keyEvent->key()==Qt::Key_Shift /*&& count_p>0*/){
+        Bullet *bullet = new Bullet();
         scene()->addItem(bullet);
+        bullet->setPos(x()+20,y());
+//        count_p--;
     }
+}
+
+void MyRect::create_enemy(){
+    Enemy *enemy=new Enemy();
+    scene()->addItem(enemy);
 }
