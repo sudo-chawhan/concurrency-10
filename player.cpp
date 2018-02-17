@@ -28,7 +28,7 @@ void Player::keyPressEvent(QKeyEvent *keyEvent){
     else if(keyEvent->key()==Qt::Key_Shift /*&& count_p>0*/){
         Bullet *bullet = new Bullet();
         scene()->addItem(bullet);
-        bullet->setPos(x()+20,y());
+        bullet->setPos(x(),y());
 //        count_p--;
     }
 }

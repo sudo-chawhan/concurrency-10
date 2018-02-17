@@ -10,8 +10,8 @@
 extern Game *game;
 
 Bullet::Bullet(){
-   // rectangle is drawn
-    setRect(0,0,1,10);
+    // draw enemy
+     setPixmap(QPixmap(":/images/bullet.png"));
     // connect
     QTimer *timer=new QTimer();
     connect(timer,SIGNAL(timeout()),this,SLOT(move()));

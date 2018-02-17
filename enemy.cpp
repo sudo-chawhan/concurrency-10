@@ -11,8 +11,10 @@ extern time_t start;
 extern Game *game;
 
 Enemy::Enemy(){
-   // rectangle is drawn
-    setRect(0,0,50,10);
+   // draw enemy
+    setPixmap(QPixmap(":/images/enemy.png"));
+    setTransformOriginPoint(25,25);
+    setRotation(180);
 
     //generate random pos
     int random_pos = rand()%750;

@@ -1,4 +1,5 @@
 #include "health.h"
+#include <QGraphicsView>
 
 Health::Health(QGraphicsItem *parent):QGraphicsTextItem(parent)
 {
@@ -14,6 +15,15 @@ Health::Health(QGraphicsItem *parent):QGraphicsTextItem(parent)
 
 void Health::decrement(){
     health--;
+//    if(health==0){
+//        view->hide();
+//        QGraphicsView *gameover = new QGraphicsView(scene());
+//        QGraphicsTextItem *gameover_text = new QGraphicsTextItem;
+//        gameover_text->setPlainText(QString("Game Over"));
+//        gameover_text->setDefaultTextColor(Qt::red);
+//        scene()->addItem(gameover_text);
+//        gameover->show();
+//    }
     setPlainText(QString("Health: ")+QString::number(health));
 }
 

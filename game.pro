@@ -40,3 +40,6 @@ HEADERS  += \
     health.h
 
 FORMS    += mainwindow.ui
+
+RESOURCES += \
+    res.qrc
