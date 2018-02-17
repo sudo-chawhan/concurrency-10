@@ -5,6 +5,10 @@
 #include <QDebug>
 #include <QGraphicsItem>
 #include <enemy.h>
+#include "game.h"
+
+extern Game *game;
+
 Bullet::Bullet(){
    // rectangle is drawn
     setRect(0,0,1,10);
@@ -25,6 +29,8 @@ void Bullet::move()
 
     for(int i=0,n=colliding_items.size();i<n;i++){
         if(typeid(*colliding_items[i])==typeid(Enemy)){
+            game->score->increment();
+
             scene()->removeItem(colliding_items[i]);
             scene()->removeItem(this);
             delete colliding_items[i];

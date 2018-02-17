@@ -1,10 +1,10 @@
-#ifndef MYRECT_H
-#define MYRECT_H
+#ifndef PLAYER_H
+#define PLAYER_H
 
 #include <QGraphicsRectItem>
 #include <QObject>
 
-class MyRect:public QObject, public QGraphicsRectItem{
+class Player:public QObject, public QGraphicsRectItem{
     Q_OBJECT
 public:
     bool boost_p;

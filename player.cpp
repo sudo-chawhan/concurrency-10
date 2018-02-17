@@ -1,4 +1,4 @@
-#include "myrect.h"
+#include "player.h"
 #include <QKeyEvent>
 #include <QGraphicsScene>
 #include "bullet.h"
@@ -8,7 +8,7 @@
 bool boost_p = false;
 //int count_p=10;
 
-void MyRect::keyPressEvent(QKeyEvent *keyEvent){
+void Player::keyPressEvent(QKeyEvent *keyEvent){
 //    qDebug()<<"player "<<count_p;
     if(keyEvent->key()==Qt::Key_Space){
         boost_p=!boost_p;
@@ -33,7 +33,7 @@ void MyRect::keyPressEvent(QKeyEvent *keyEvent){
     }
 }
 
-void MyRect::create_enemy(){
+void Player::create_enemy(){
     Enemy *enemy=new Enemy();
     scene()->addItem(enemy);
 }

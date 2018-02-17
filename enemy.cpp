@@ -4,6 +4,11 @@
 #include <QGraphicsView>
 #include <QDebug>
 #include <stdlib.h>
+#include <time.h>
+#include "game.h"
+
+extern time_t start;
+extern Game *game;
 
 Enemy::Enemy(){
    // rectangle is drawn
@@ -24,10 +29,15 @@ Enemy::Enemy(){
 
 void Enemy::move()
 {
-    setPos(x(),y()+5);
+    if(5+((time(0)-start)/8)>=15)
+        setPos(x(),y()+15);
+    else
+        setPos(x(),y()+5+((time(0)-start)/8));
+    qDebug()<<5+((time(0)-start)/5);
 
 //    qDebug()<<pos().y();
-    if(pos().y()<0 || pos().y()>600){
+    if(pos().y()>600){
+        game->health->decrement();
         scene()->removeItem(this);
         delete this;
     }
