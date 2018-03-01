@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/images">
+        <file>download.jpeg</file>
+        <file>maxresdefault.jpg</file>
+        <file>ye.png</file>
+    </qresource>
+</RCC>
