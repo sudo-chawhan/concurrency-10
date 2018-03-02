@@ -5,7 +5,10 @@
 #include "bullet.h"
 
 
-player::player(bool team_a,QGraphicsItem *parent): QGraphicsPixmapItem(parent){
+player::player(int id1, bool team_a,QGraphicsItem *parent): QGraphicsPixmapItem(parent){
+
+    id=id1;
+
     if(team_a==true){
         this->team_b=false;
         this->team_a=true;
@@ -16,7 +19,7 @@ player::player(bool team_a,QGraphicsItem *parent): QGraphicsPixmapItem(parent){
     }
 
     // set graphic
-    setPixmap(QPixmap(":/images/download.jpeg"));
+    setPixmap(QPixmap(":/images/player.png"));
 }
 
 void player::keyPressEvent(QKeyEvent *event){
@@ -51,6 +54,11 @@ bool player::find_b(){
         return true;
     else
         return false;
+}
+
+int player::get_id()
+{
+    return id;
 }
 
 

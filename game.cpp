@@ -19,14 +19,14 @@ Game::Game(QWidget *parent){
     setFixedSize(800,600);
 
     // create the player
-    team1 = new player(true);
+    team1 = new player(0,true);
     team1->setPos(400,500); // TODO generalize to always be in the middle bottom of screen
     // make the player focusable and set it to be the current focus
     team1->setFlag(QGraphicsItem::ItemIsFocusable);
     team1->setFocus();
     // add the player to the scene
     scene->addItem(team1);
-    team2 = new player(false);
+    team2 = new player(1,false);
     team2->setPos(400,100); // TODO generalize to always be in the middle bottom of screen
     // make the player focusable and set it to be the current focus
     team2->setFlag(QGraphicsItem::ItemIsFocusable);
