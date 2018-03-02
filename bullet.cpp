@@ -4,10 +4,19 @@
 #include <QGraphicsPixmapItem>
 #include <QObject>
 #include <QList>
+#include <vector>
+#include <QDebug>
+#include <iterator>
 #include<typeinfo>
 #include "game.h"
 
 extern Game * game; // there is an external global object called game
+
+void bullet::delete_bullet()
+{
+    scene()->removeItem(this);
+
+}
 
 bullet::bullet(QGraphicsItem *parent):QObject(),QGraphicsPixmapItem(parent){
     // draw graphics
@@ -24,8 +33,10 @@ bullet::bullet(QGraphicsItem *parent):QObject(),QGraphicsPixmapItem(parent){
 }
 
 void bullet::move(){
-//    // get a list of all the items currently colliding with this bullet
-//    QList<QGraphicsItem *> colliding_items = collidingItems();
+    // get a list of all the items currently colliding with this bullet
+    QList<QGraphicsItem *> colliding_items = collidingItems();
+    std::vector<bullet*> ::iterator it=find((game->gamestate->bullets).begin(),(game->gamestate->bullets).end(),this);
+    auto pos_in_vec = std::distance((game->gamestate->bullets).begin(), it);
 
 //    // if one of the colliding items is an Enemy, destroy both the bullet and the enemy
 //    for (int i = 0, n = colliding_items.size(); i < n; ++i){
@@ -52,6 +63,8 @@ void bullet::move(){
         // if the bullet is off the screen, destroy it
         if (pos().y() < 0){
             scene()->removeItem(this);
+            (game->gamestate->bullets).erase((game->gamestate->bullets).begin()+pos_in_vec);
+            qDebug()<<"position of this bullet is "<<pos_in_vec;
             delete this;
         }
     }
@@ -59,6 +72,8 @@ void bullet::move(){
         setPos(x(),y()+10);
         if (pos().y() > 600){
             scene()->removeItem(this);
+            (game->gamestate->bullets).erase((game->gamestate->bullets).begin()+pos_in_vec);
+            qDebug()<<"position of this bullet is "<<pos_in_vec;
             delete this;
     }
 

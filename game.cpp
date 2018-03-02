@@ -12,7 +12,7 @@ Game::Game(QWidget *parent){
     InputHandler *inputHandler = new InputHandler(NULL);
     // create the scene
     scene = new QGraphicsScene();
-    scene->setSceneRect(0,0,800,600); // make the scene 800x600 instead of infinity by infinity (default)
+    scene->setSceneRect(0,0,1280,720); // make the scene 800x600 instead of infinity by infinity (default)
     inputHandler->setBackgroundBrush(QBrush(QImage(":/images/ye.png")));
 
     // make the newly created scene the scene to visualize (since Game is a QGraphicsView Widget,
@@ -20,7 +20,7 @@ Game::Game(QWidget *parent){
     inputHandler->setScene(scene);
     inputHandler->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     inputHandler->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    inputHandler->setFixedSize(800,600);
+    inputHandler->setFixedSize(1280,720);
     
     // create the player
     team1 = new player(0,true);
@@ -28,7 +28,7 @@ Game::Game(QWidget *parent){
     team1->setPos(400,500); // TODO generalize to always be in the middle bottom of screen
     // make the player focusable and set it to be the current focus
     team1->setFlag(QGraphicsItem::ItemIsFocusable);
-    team1->setFocus();
+//    team1->setFocus();
     // add the player to the scene
     scene->addItem(team1);
     team2 = new player(1,false);
@@ -40,11 +40,13 @@ Game::Game(QWidget *parent){
     // add the player to the scene
     scene->addItem(team2);
 
-    GameState *gamestate = new GameState();
+    gamestate = new GameState();
     gamestate->addPlayer(team1);
     gamestate->addPlayer(team2);
 
     inputHandler->setGameState(gamestate);
+    inputHandler->showFullScreen();
+
 
     // create the score/health
    // score = new Score();

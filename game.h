@@ -6,6 +6,7 @@
 #include <QGraphicsScene>
 #include "player.h"
 #include "inputhandler.h"
+#include "gamestate.h"
 //#include "Score.h"
 //#include "Health.h"
 
@@ -17,6 +18,7 @@ public:
     InputHandler *view;
     player * team1;
     player * team2;
+    GameState *gamestate;
     //Score * score;
     //Health * health;
 
