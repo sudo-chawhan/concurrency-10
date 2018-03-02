@@ -8,10 +8,10 @@
 
 class GameState: public QObject{
     Q_OBJECT
-private:
+public:
+    GameState();
     std::vector<bullet*> bullets;
     std::vector<player*> players;
-public:
     void addBullet(bullet * new_bullet);
     void addPlayer(player * new_player);
     void updatePlayer(int id, QPoint new_pos);

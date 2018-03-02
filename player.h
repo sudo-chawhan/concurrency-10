@@ -10,7 +10,7 @@ class player:public QObject, public QGraphicsPixmapItem{
 public:
     bool team_a,team_b;
     player(int id,bool team_a,QGraphicsItem * parent=0);
-    void keyPressEvent(QKeyEvent * event);
+//    void keyPressEvent(QKeyEvent * event);
     bool find_a();
     bool find_b();
     int get_id();
