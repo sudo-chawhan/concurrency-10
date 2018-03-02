@@ -9,17 +9,18 @@
 #include "inputhandler.h"
 
 Game::Game(QWidget *parent){
+    InputHandler *inputHandler = new InputHandler(NULL);
     // create the scene
     scene = new QGraphicsScene();
     scene->setSceneRect(0,0,800,600); // make the scene 800x600 instead of infinity by infinity (default)
-    setBackgroundBrush(QBrush(QImage(":/images/ye.png")));
+    inputHandler->setBackgroundBrush(QBrush(QImage(":/images/ye.png")));
 
     // make the newly created scene the scene to visualize (since Game is a QGraphicsView Widget,
     // it can be used to visualize scenes)
-    setScene(scene);
-    setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    setFixedSize(800,600);
+    inputHandler->setScene(scene);
+    inputHandler->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    inputHandler->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    inputHandler->setFixedSize(800,600);
     
     // create the player
     team1 = new player(0,true);
@@ -42,7 +43,8 @@ Game::Game(QWidget *parent){
     GameState *gamestate = new GameState();
     gamestate->addPlayer(team1);
     gamestate->addPlayer(team2);
-    InputHandler *inputHandler = new InputHandler(gamestate);
+
+    inputHandler->setGameState(gamestate);
 
     // create the score/health
    // score = new Score();
@@ -51,6 +53,6 @@ Game::Game(QWidget *parent){
     //health->setPos(health->x(),health->y()+25);
     //scene->addItem(health);
 
-    show();
+    inputHandler->show();
 }
 

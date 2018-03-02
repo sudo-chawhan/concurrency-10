@@ -5,7 +5,7 @@
 
 InputHandler::InputHandler(GameState *game_state){
     gameState=game_state;
-    qDebug()<<gameState->getJsonDocFromGameState().toJson();
+//    qDebug()<<gameState->getJsonDocFromGameState().toJson();
 }
 
 void InputHandler::setGameState(GameState *game_state){
