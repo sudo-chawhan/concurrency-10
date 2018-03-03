@@ -5,6 +5,7 @@
 #-------------------------------------------------
 
 QT       += core gui
+QT       += websockets
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -17,14 +18,18 @@ SOURCES += main.cpp \
     player.cpp \
     bullet.cpp \
     gamestate.cpp \
-    inputhandler.cpp
+    inputhandler.cpp \
+    server.cpp \
+    client.cpp
 
 HEADERS  += \
     game.h \
     player.h \
     bullet.h \
     gamestate.h \
-    inputhandler.h
+    inputhandler.h \
+    server.h \
+    client.h
 
 FORMS    +=
 

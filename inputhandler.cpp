@@ -3,7 +3,8 @@
 #include <QEvent>
 #include <iostream>
 
-InputHandler::InputHandler(GameState *game_state){
+InputHandler::InputHandler(Client *input_client, GameState *game_state){
+    client=input_client;
     gameState=game_state;
 //    qDebug()<<gameState->getJsonDocFromGameState().toJson();
 }
@@ -17,16 +18,32 @@ void InputHandler::keyPressEvent(QKeyEvent *event){
 
     qDebug()<<"Input read";
 
-    qreal x_pos = gameState->players[0]->pos().x();
-    qreal y_pos = gameState->players[0]->pos().y();
+    qreal x_pos = gameState->players[client->id]->pos().x();
+    qreal y_pos = gameState->players[client->id]->pos().y();
     // move the player left and right
     if (event->key() == Qt::Key_Left){
         if (x_pos > 0)
-            gameState->players[0]->setPos(x_pos-10,y_pos);
+        {
+            //left pressed
+            QJsonObject gamestate1;
+            gamestate1.insert("id",client->id);
+            gamestate1.insert("key","LEFT");
+            QJsonDocument doc(gamestate1);
+            QByteArray bytes = doc.toJson();
+            client->sendBinaryMessageToServer(bytes);
+        }
     }
     else if (event->key() == Qt::Key_Right){
         if (x_pos + 100 < 800)
-            gameState->players[0]->setPos(x_pos+10,y_pos);
+        {
+
+            QJsonObject gamestate1;
+            gamestate1.insert("id",client->id);
+            gamestate1.insert("key","RIGHT");
+            QJsonDocument doc(gamestate1);
+            QByteArray bytes = doc.toJson();
+            client->sendBinaryMessageToServer(bytes);
+        }
     }
     // shoot with the spacebar
     else if (event->key() == Qt::Key_Space){

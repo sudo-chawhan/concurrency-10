@@ -9,15 +9,19 @@
 #include <QKeyEvent>
 #include <vector>
 #include "gamestate.h"
+#include "client.h"
 
 class InputHandler : public QGraphicsView
 {
 private:
     GameState *gameState;
+    Client *client;
+
 public:
-    InputHandler(GameState *game_state);
+    InputHandler(Client *input_client, GameState *game_state);
     void setGameState(GameState *game_state);
     void keyPressEvent(QKeyEvent *event);
+    int id;
 
 };
 
