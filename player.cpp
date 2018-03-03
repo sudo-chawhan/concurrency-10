@@ -22,25 +22,13 @@ player::player(int id1, bool team_a,QGraphicsItem *parent): QGraphicsPixmapItem(
     setPixmap(QPixmap(":/images/player.png"));
 }
 
-//void player::keyPressEvent(QKeyEvent *event){
-//    // move the player left and right
-//    if (event->key() == Qt::Key_Left){
-//        if (pos().x() > 0)
-            
-//    }
-//    else if (event->key() == Qt::Key_Right){
-//        if (pos().x() + 100 < 800)
-//        setPos(x()+10,y());
-//    }
-//    // shoot with the spacebar
-//    else if (event->key() == Qt::Key_Space){
-//         //create a bullet
-//        bullet * bull = new bullet();
-//        bull->a_finder=this->find_a();
-//        bull->setPos(x()+45,y());
-//        scene()->addItem(bull);
-//    }
-//}
+void player::moveLeft(){
+    setPos(x()-10,y());
+}
+
+void player::moveRight(){
+    setPos(x()+10,y());
+}
 
 bool player:: find_a(){
     if(this->team_a==true)

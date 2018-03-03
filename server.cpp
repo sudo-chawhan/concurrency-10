@@ -3,6 +3,9 @@
 #include <QtWebSockets>
 #include <QtCore>
 #include <QDebug>
+#include <string>
+
+#include "player.h"
 
 #include <cstdio>
 using namespace std;
@@ -21,6 +24,8 @@ Server::Server(quint16 port, QObject *parent) :
                                             QWebSocketServer::NonSecureMode,
                                             this))
 {
+    gameState = new GameState();
+
     if (m_pWebSocketServer->listen(QHostAddress::Any, port))
     {
 
@@ -36,14 +41,39 @@ Server::~Server()
 
 }
 
+void Server::startGameLoop(){
+
+}
+
 void Server::onNewConnection()
 {
+    qDebug()<<"new connection with client...";
+    // id to send to client
+    int id;
+    // make new player
+    player *new_player;
+    if(gameState->players.size()==0){
+        id=0;
+        new_player = new player(id,true);
+        new_player->setPos(400,500); // TODO generalize to always be in the middle bottom of screen
+    }
+   else{
+        id=1;
+        new_player = new player(id,false);
+        new_player->setPos(400,100); // TODO generalize to always be in the middle bottom of screen
+    }// make the player focusable and set it to be the current focus
+
+    gameState->players.push_back(new_player);
+
     auto pSocket = m_pWebSocketServer->nextPendingConnection();
     QTextStream(stdout) << getIdentifier(pSocket) << " connected!\n";
     pSocket->setParent(this);
 
     connect(pSocket, &QWebSocket::textMessageReceived,
-            this, &Server::processMessage);
+            this, &Server::onTextMessageFromClient);
+
+    connect(pSocket, &QWebSocket::binaryMessageReceived,
+            this, &Server::onBinaryMessageFromClient);
 
 //    connect(pSocket, &QWebSocket::binaryMessageReceived,
 //            this, &Server::onBinaryMessage);
@@ -51,20 +81,59 @@ void Server::onNewConnection()
     connect(pSocket, &QWebSocket::disconnected,
             this, &Server::socketDisconnected);
 
-    pSocket->sendTextMessage("Hello wassup bro!");
+    std::string init_messsage="init:";
+    init_messsage+=std::to_string(id);
+    pSocket->sendTextMessage(QString::fromStdString(init_messsage));
+    qDebug()<<"init message sent to client #"<<id;
 
     m_clients << pSocket;
+
+    // if all clients are done start game loop
+    // ...
+    if(id==1){
+        QJsonDocument doc = gameState->getJsonDocFromGameState();
+        QByteArray bytes = doc.toJson();
+
+        qDebug()<<"server sent json message at game init:";
+        qDebug()<<bytes;
+
+        for (QList<QWebSocket*>::iterator i = m_clients.begin(); i != m_clients.end(); i++)
+        {
+              (*i)->sendBinaryMessage(bytes);
+        }
+    }
+
+
 }
 
-//void Server::onBinaryMessage(QByteArray message){
-//    // should be done in parallel
-//    QJsonDocument item_doc = QJsonDocument::fromJson(message);
-//    QJsonObject item_object = item_doc.object();
-//    int id = item_object["id"].toInt();
-//    QString key = item_object["key"].toString();
-//}
+void Server::onBinaryMessageFromClient(QByteArray message){
+    // should be done in parallel
+    QJsonDocument item_doc = QJsonDocument::fromJson(message);
+    QJsonObject item_object = item_doc.object();
+    int id = item_object["id"].toInt();
+    QString key = item_object["key"].toString();
 
-void Server::processMessage(const QString &message)
+    if(key=="LEFT"){
+        gameState->players.at(id)->moveLeft();
+    }
+    if(key=="RIGHT"){
+        gameState->players.at(id)->moveRight();
+    }
+
+    QJsonDocument doc = gameState->getJsonDocFromGameState();
+    QByteArray bytes = doc.toJson();
+
+    for (QList<QWebSocket*>::iterator i = m_clients.begin(); i != m_clients.end(); i++)
+    {
+          (*i)->sendBinaryMessage(bytes);
+    }
+
+
+}
+
+
+
+void Server::onTextMessageFromClient(const QString &message)
 {
     qDebug()<<"from client: "<<message;
 //    QWebSocket *pSender = qobject_cast<QWebSocket *>(sender());

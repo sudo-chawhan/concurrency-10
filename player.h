@@ -14,6 +14,8 @@ public:
     bool find_a();
     bool find_b();
     int get_id();
+    void moveLeft();
+    void moveRight();
 private:
     int id;
 };

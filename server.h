@@ -3,6 +3,7 @@
 
 #include <QtCore/QObject>
 #include <QtCore/QList>
+#include "gamestate.h"
 
 QT_FORWARD_DECLARE_CLASS(QWebSocketServer)
 QT_FORWARD_DECLARE_CLASS(QWebSocket)
@@ -14,10 +15,13 @@ class Server : public QObject
 public:
     explicit Server(quint16 port, QObject *parent = nullptr);
     virtual ~Server();
+    GameState *gameState;
+    void startGameLoop();
 
 private slots:
     void onNewConnection();
-    void processMessage(const QString &message);
+    void onTextMessageFromClient(const QString &message);
+    void onBinaryMessageFromClient(QByteArray message);
     void socketDisconnected();
 
 private:
