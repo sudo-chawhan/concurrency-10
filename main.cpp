@@ -4,13 +4,11 @@
 #include "mainwindow.h"
 #include "dialog.h"
 
-Server *server;
-Game * game;
-bool isServer;
+
 
 int main(int argc, char *argv[]){
     QApplication a(argc, argv);
-    isServer = false;
+
     //server= new Server(3000);
 
     //game = new Game();

@@ -50,25 +50,25 @@ void bullet::move(){
 
 // // // // // // // // IF SERVER
 
-    ///if(is_server){
+    if(is_server){
 
        /// qDebug()<<"is server!";
 
-//        if(pos().y()<0 || pos().y()>600){
-//            qDebug()<<"is out of bound";
-//            // delete this bullet from bullets vector
+        if(pos().y()<0 || pos().y()>400){
+            qDebug()<<"is out of bound";
+            // delete this bullet from bullets vector
 
 
-//            // find the index of the bullet in bullets vector
-//            std::vector<bullet*> ::iterator it=find((server->gameState->bullets).begin(),(server->gameState->bullets).end(),this);
-//            auto pos_in_vec = std::distance((server->gameState->bullets).begin(), it);
-//            qDebug()<<"bullets size before: "<<(server->gameState->bullets).size();
-//            (server->gameState->bullets).erase((server->gameState->bullets).begin()+pos_in_vec);
-//            qDebug()<<"bullets size after: "<<(server->gameState->bullets).size();
-//            delete this;
+            // find the index of the bullet in bullets vector
+            std::vector<bullet*> ::iterator it=find((server->gameState->bullets).begin(),(server->gameState->bullets).end(),this);
+            auto pos_in_vec = std::distance((server->gameState->bullets).begin(), it);
+            qDebug()<<"bullets size before: "<<(server->gameState->bullets).size();
+            (server->gameState->bullets).erase((server->gameState->bullets).begin()+pos_in_vec);
+            qDebug()<<"bullets size after: "<<(server->gameState->bullets).size();
+            delete this;
 
-//            return;
-//        }
+            return;
+        }
 
         // get a list of all the items currently colliding with this bullet
 //        QList<QGraphicsItem *> colliding_items = collidingItems();
@@ -114,6 +114,6 @@ void bullet::move(){
         //        }
 
         //    }
-   /// }
+    }
 }
 
