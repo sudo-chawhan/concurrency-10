@@ -34,8 +34,6 @@ HEADERS  += \
     inputhandler.h \
     server.h \
     client.h \
-    player_teama.h \
-    player_teamb.h \
     mainwindow.h \
     dialog.h
 

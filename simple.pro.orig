@@ -21,11 +21,13 @@ SOURCES += main.cpp \
     inputhandler.cpp \
     server.cpp \
     client.cpp \
+<<<<<<< HEAD
     player_teama.cpp \
-    player_teamb.cpp
+    player_teamb.cpp \
+=======
+>>>>>>> 5b1e8c4445ad304263519aa0065ae8d3a277020f
     mainwindow.cpp \
     dialog.cpp
-
 
 HEADERS  += \
     game.h \
@@ -35,8 +37,11 @@ HEADERS  += \
     inputhandler.h \
     server.h \
     client.h \
+<<<<<<< HEAD
     player_teama.h \
-    player_teamb.h
+    player_teamb.h \
+=======
+>>>>>>> 5b1e8c4445ad304263519aa0065ae8d3a277020f
     mainwindow.h \
     dialog.h
 
