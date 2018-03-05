@@ -20,7 +20,9 @@ SOURCES += main.cpp \
     gamestate.cpp \
     inputhandler.cpp \
     server.cpp \
-    client.cpp
+    client.cpp \
+    mainwindow.cpp \
+    dialog.cpp
 
 HEADERS  += \
     game.h \
@@ -29,7 +31,9 @@ HEADERS  += \
     gamestate.h \
     inputhandler.h \
     server.h \
-    client.h
+    client.h \
+    mainwindow.h \
+    dialog.h
 
 FORMS    +=
 

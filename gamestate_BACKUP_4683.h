@@ -1,0 +1,29 @@
+#ifndef GAMESTATE_H
+#define GAMESTATE_H
+#include <vector>
+#include <QJsonObject>
+#include <QJsonDocument>
+#include "bullet.h"
+#include "player.h"
+
+class GameState: public QObject{
+    Q_OBJECT
+private:
+    int bullet_count=0;
+public:
+    GameState();
+    std::vector<bullet*> bullets;
+    std::vector<player*> players;
+    void addBullet(bullet * new_bullet);
+    void addPlayer(player * new_player);
+    void updatePlayer(int id, QPoint new_pos);
+<<<<<<< HEAD
+    void onBinaryMessage(QByteArray bytes);
+=======
+    void createBullet(bool team1,qreal x,qreal y);
+>>>>>>> e07eaa1723ec202cb3060466d3757d605b5154a4
+    QJsonDocument getJsonDocFromGameState();
+};
+
+
+#endif // GAMESTATE_H
