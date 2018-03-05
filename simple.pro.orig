@@ -22,9 +22,10 @@ SOURCES += main.cpp \
     server.cpp \
     client.cpp \
     player_teama.cpp \
-    player_teamb.cpp \
+    player_teamb.cpp
     mainwindow.cpp \
     dialog.cpp
+
 
 HEADERS  += \
     game.h \
@@ -35,7 +36,7 @@ HEADERS  += \
     server.h \
     client.h \
     player_teama.h \
-    player_teamb.h \
+    player_teamb.h
     mainwindow.h \
     dialog.h
 
