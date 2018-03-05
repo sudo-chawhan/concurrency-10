@@ -84,14 +84,27 @@ void Client::onBinaryMessageReceived(QByteArray bytes)
     QJsonArray playerArray = item["players"].toArray();
 
     // check if to delete a bullet, can be done in ****** parallel******
-
-    for(auto q = gameState->bullets.begin() ; q != gameState->bullets.end() ; q++)
+//%%%%%%%%%% ERROR
+    for(int i=0;i<gameState->bullets.size();i++)
     {
+        auto q = gameState->bullets.at(i);
         // if bullet does not exist then delete it
-        if(!checkBullet(bulletArray,(*q)->id))
+        if(!checkBullet(bulletArray,(q)->id))
         {
 //***            // delete bullet
+            qDebug()<<"*******bullet deleted id:"<<((q)->id);
+            game->scene->removeItem(q);
+            qDebug()<<"123";
+//            std::vector<bullet*> ::iterator it=find((gameState->bullets).begin(),(game->gamestate->bullets).end(),q);
+            qDebug()<<"1234";
+//            auto pos_in_vec = std::distance((gameState->bullets).begin(), it);
+            qDebug()<<"12344";
+            (gameState->bullets).erase((gameState->bullets).begin()+i);
+            qDebug()<<"123444";
+            delete (q);
+            qDebug()<<"1234444";
         }
+
     }
 
     foreach(const QJsonValue & value , bulletArray)

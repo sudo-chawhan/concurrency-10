@@ -48,59 +48,70 @@ void bullet::move(){
 
 // // // // // // // // IF SERVER
 
-    if(pos().y()<0 || pos().y()>600){
-        // delete this bullet from bullets vector
+    if(isServer){
 
+        qDebug()<<"is server!";
 
-        // find the index of the bullet in bullets vector
-        std::vector<bullet*> ::iterator it=find((game->gamestate->bullets).begin(),(game->gamestate->bullets).end(),this);
-        auto pos_in_vec = std::distance((game->gamestate->bullets).begin(), it);
-        (game->gamestate->bullets).erase((game->gamestate->bullets).begin()+pos_in_vec);
-    }
-
-    // get a list of all the items currently colliding with this bullet
-    QList<QGraphicsItem *> colliding_items = collidingItems();
-
-    // if one of the colliding items is an Enemy, destroy both the bullet and the enemy
-    for (int i = 0, n = colliding_items.size(); i < n; ++i){
-
-        // collided with an enemy team
-        if ((typeid(*(colliding_items[i])) == typeid(player_teama) && team==true)||(typeid(*(colliding_items[i])) == typeid(player_teamb) && team==false)){
-
+        if(pos().y()<0 || pos().y()>600){
+            qDebug()<<"is out of bound";
             // delete this bullet from bullets vector
 
-            // find the index of the bullet in bullets vector
-            std::vector<bullet*> ::iterator it=find((game->gamestate->bullets).begin(),(game->gamestate->bullets).end(),this);
-            auto pos_in_vec = std::distance((game->gamestate->bullets).begin(), it);
-            (game->gamestate->bullets).erase((game->gamestate->bullets).begin()+pos_in_vec);
 
-            // make colliding item's isDead=true
-            qDebug()<<"player is dead!";
-            // return (all code below refers to a non existint bullet)
+            // find the index of the bullet in bullets vector
+            std::vector<bullet*> ::iterator it=find((server->gameState->bullets).begin(),(server->gameState->bullets).end(),this);
+            auto pos_in_vec = std::distance((server->gameState->bullets).begin(), it);
+            qDebug()<<"bullets size before: "<<(server->gameState->bullets).size();
+            (server->gameState->bullets).erase((server->gameState->bullets).begin()+pos_in_vec);
+            qDebug()<<"bullets size after: "<<(server->gameState->bullets).size();
+            delete this;
+
             return;
         }
+
+        // get a list of all the items currently colliding with this bullet
+        QList<QGraphicsItem *> colliding_items = collidingItems();
+
+        // if one of the colliding items is an Enemy, destroy both the bullet and the enemy
+        for (int i = 0, n = colliding_items.size(); i < n; ++i){
+
+            // collided with an enemy team
+            if ((typeid(*(colliding_items[i])) == typeid(player_teama) && team==true)||(typeid(*(colliding_items[i])) == typeid(player_teamb) && team==false)){
+
+                // delete this bullet from bullets vector
+
+                // find the index of the bullet in bullets vector
+                std::vector<bullet*> ::iterator it=find((server->gameState->bullets).begin(),(server->gameState->bullets).end(),this);
+                auto pos_in_vec = std::distance((server->gameState->bullets).begin(), it);
+                (server->gameState->bullets).erase((server->gameState->bullets).begin()+pos_in_vec);
+                delete this;
+                // make colliding item's isDead=true
+                qDebug()<<"player is dead!";
+                // return (all code below refers to a non existint bullet)
+                return;
+            }
+        }
+
+        // if there was no collision with an Enemy, move the bullet forward
+        //    if(this->a_finder==true){
+        //        setPos(x(),y()-10);
+        //        // if the bullet is off the screen, destroy it
+        //        if (pos().y() < 0){
+        //            scene()->removeItem(this);
+        //            (game->gamestate->bullets).erase((game->gamestate->bullets).begin()+pos_in_vec);
+        //            qDebug()<<"position of this bullet is "<<pos_in_vec;
+        //            delete this;
+        //        }
+        //    }
+        //    else{
+        //        setPos(x(),y()+10);
+        //        if (pos().y() > 600){
+        //            scene()->removeItem(this);
+        //            (game->gamestate->bullets).erase((game->gamestate->bullets).begin()+pos_in_vec);
+        //            qDebug()<<"position of this bullet is "<<pos_in_vec;
+        //            delete this;
+        //        }
+
+        //    }
     }
-
-    // if there was no collision with an Enemy, move the bullet forward
-//    if(this->a_finder==true){
-//        setPos(x(),y()-10);
-//        // if the bullet is off the screen, destroy it
-//        if (pos().y() < 0){
-//            scene()->removeItem(this);
-//            (game->gamestate->bullets).erase((game->gamestate->bullets).begin()+pos_in_vec);
-//            qDebug()<<"position of this bullet is "<<pos_in_vec;
-//            delete this;
-//        }
-//    }
-//    else{
-//        setPos(x(),y()+10);
-//        if (pos().y() > 600){
-//            scene()->removeItem(this);
-//            (game->gamestate->bullets).erase((game->gamestate->bullets).begin()+pos_in_vec);
-//            qDebug()<<"position of this bullet is "<<pos_in_vec;
-//            delete this;
-//        }
-
-//    }
 }
 
