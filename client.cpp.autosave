@@ -91,6 +91,11 @@ void Client::onBinaryMessageReceived(QByteArray bytes)
         if(!checkBullet(bulletArray,(*q)->id))
         {
 //***            // delete bullet
+            qDebug()<<"*******bullet deleted id:"<<((*q)->id);
+            game->scene->removeItem(*q);
+            std::vector<bullet*> ::iterator it=find((gameState->bullets).begin(),(game->gamestate->bullets).end(),*q);
+            auto pos_in_vec = std::distance((gameState->bullets).begin(), it);
+            (game->gamestate->bullets).erase((gameState->bullets).begin()+pos_in_vec);
         }
     }
 

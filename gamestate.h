@@ -5,6 +5,8 @@
 #include <QJsonDocument>
 #include "bullet.h"
 #include "player.h"
+#include "player_teama.h"
+#include "player_teamb.h"
 
 class GameState: public QObject{
     Q_OBJECT

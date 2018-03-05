@@ -8,9 +8,16 @@
 #include <QDebug>
 #include <iterator>
 #include<typeinfo>
+#include "server.h"
+#include "player.h"
+#include "player_teama.h"
+#include "player_teamb.h"
+
 #include "game.h"
 
 extern Game * game; // there is an external global object called game
+extern bool isServer;
+extern Server *server;
 
 void bullet::delete_bullet()
 {
@@ -39,36 +46,36 @@ void bullet::move(){
     else
         setPos(x(),y()+10);
 
+// // // // // // // // IF SERVER
+
     if(pos().y()<0 || pos().y()>600){
         // delete this bullet from bullets vector
 
-        // get a list of all the items currently colliding with this bullet
-        QList<QGraphicsItem *> colliding_items = collidingItems();
+
         // find the index of the bullet in bullets vector
         std::vector<bullet*> ::iterator it=find((game->gamestate->bullets).begin(),(game->gamestate->bullets).end(),this);
         auto pos_in_vec = std::distance((game->gamestate->bullets).begin(), it);
         (game->gamestate->bullets).erase((game->gamestate->bullets).begin()+pos_in_vec);
     }
 
-
+    // get a list of all the items currently colliding with this bullet
+    QList<QGraphicsItem *> colliding_items = collidingItems();
 
     // if one of the colliding items is an Enemy, destroy both the bullet and the enemy
     for (int i = 0, n = colliding_items.size(); i < n; ++i){
 
         // collided with an enemy team
-        if (typeid(*(colliding_items[i])) == typeid(player) && !team==(*(colliding_items[i]))->team){
+        if ((typeid(*(colliding_items[i])) == typeid(player_teama) && team==true)||(typeid(*(colliding_items[i])) == typeid(player_teamb) && team==false)){
 
             // delete this bullet from bullets vector
 
-            // get a list of all the items currently colliding with this bullet
-            QList<QGraphicsItem *> colliding_items = collidingItems();
             // find the index of the bullet in bullets vector
             std::vector<bullet*> ::iterator it=find((game->gamestate->bullets).begin(),(game->gamestate->bullets).end(),this);
             auto pos_in_vec = std::distance((game->gamestate->bullets).begin(), it);
             (game->gamestate->bullets).erase((game->gamestate->bullets).begin()+pos_in_vec);
 
             // make colliding item's isDead=true
-
+            qDebug()<<"player is dead!";
             // return (all code below refers to a non existint bullet)
             return;
         }

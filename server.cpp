@@ -6,6 +6,8 @@
 #include <string>
 
 #include "player.h"
+#include "player_teama.h"
+#include "player_teamb.h"
 
 #include <cstdio>
 using namespace std;
@@ -54,12 +56,12 @@ void Server::onNewConnection()
     player *new_player;
     if(gameState->players.size()==0){
         id=0;
-        new_player = new player(id,true);
+        new_player = new player_teama(id,true);
         new_player->setPos(400,500); // TODO generalize to always be in the middle bottom of screen
     }
    else{
         id=1;
-        new_player = new player(id,false);
+        new_player = new player_teamb(id,false);
         new_player->setPos(400,100); // TODO generalize to always be in the middle bottom of screen
     }// make the player focusable and set it to be the current focus
 
