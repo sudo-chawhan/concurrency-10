@@ -8,9 +8,10 @@
 class bullet: public QObject,public QGraphicsPixmapItem {
     Q_OBJECT
 public:
-    bool a_finder;
+    bool team;
     void delete_bullet();
-    bullet(QGraphicsItem * parent=0);
+    int id;
+    bullet(int id,bool team1,QGraphicsItem * parent=0);
 public slots:
     void move();
 };

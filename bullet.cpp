@@ -18,14 +18,15 @@ void bullet::delete_bullet()
 
 }
 
-bullet::bullet(QGraphicsItem *parent):QObject(),QGraphicsPixmapItem(parent){
+bullet::bullet(int id1,bool team1,QGraphicsItem *parent):QObject(),QGraphicsPixmapItem(parent){
+    id =id1;
+    team = team1;
     // draw graphics
     setPixmap(QPixmap(":/images/bullet.png"));
 
 
     // make/connect a timer to move() the bullet every so often
     QTimer * timer = new QTimer(this);
-    bool type_finder=game->team1->find_a();
     connect(timer,SIGNAL(timeout()),this,SLOT(move()));
 
     // start the timer
@@ -33,10 +34,14 @@ bullet::bullet(QGraphicsItem *parent):QObject(),QGraphicsPixmapItem(parent){
 }
 
 void bullet::move(){
+    if(team)
+        setPos(x(),y()-10);
+    else
+        setPos(x(),y()+10);
     // get a list of all the items currently colliding with this bullet
-    QList<QGraphicsItem *> colliding_items = collidingItems();
-    std::vector<bullet*> ::iterator it=find((game->gamestate->bullets).begin(),(game->gamestate->bullets).end(),this);
-    auto pos_in_vec = std::distance((game->gamestate->bullets).begin(), it);
+//    QList<QGraphicsItem *> colliding_items = collidingItems();
+//    std::vector<bullet*> ::iterator it=find((game->gamestate->bullets).begin(),(game->gamestate->bullets).end(),this);
+//    auto pos_in_vec = std::distance((game->gamestate->bullets).begin(), it);
 
 //    // if one of the colliding items is an Enemy, destroy both the bullet and the enemy
 //    for (int i = 0, n = colliding_items.size(); i < n; ++i){
@@ -58,25 +63,25 @@ void bullet::move(){
 //    }
 
     // if there was no collision with an Enemy, move the bullet forward
-    if(this->a_finder==true){
-        setPos(x(),y()-10);
-        // if the bullet is off the screen, destroy it
-        if (pos().y() < 0){
-            scene()->removeItem(this);
-            (game->gamestate->bullets).erase((game->gamestate->bullets).begin()+pos_in_vec);
-            qDebug()<<"position of this bullet is "<<pos_in_vec;
-            delete this;
-        }
-    }
-    else{
-        setPos(x(),y()+10);
-        if (pos().y() > 600){
-            scene()->removeItem(this);
-            (game->gamestate->bullets).erase((game->gamestate->bullets).begin()+pos_in_vec);
-            qDebug()<<"position of this bullet is "<<pos_in_vec;
-            delete this;
-    }
+//    if(this->a_finder==true){
+//        setPos(x(),y()-10);
+//        // if the bullet is off the screen, destroy it
+//        if (pos().y() < 0){
+//            scene()->removeItem(this);
+//            (game->gamestate->bullets).erase((game->gamestate->bullets).begin()+pos_in_vec);
+//            qDebug()<<"position of this bullet is "<<pos_in_vec;
+//            delete this;
+//        }
+//    }
+//    else{
+//        setPos(x(),y()+10);
+//        if (pos().y() > 600){
+//            scene()->removeItem(this);
+//            (game->gamestate->bullets).erase((game->gamestate->bullets).begin()+pos_in_vec);
+//            qDebug()<<"position of this bullet is "<<pos_in_vec;
+//            delete this;
+//        }
 
-}
+//    }
 }
 

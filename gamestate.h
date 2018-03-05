@@ -8,6 +8,8 @@
 
 class GameState: public QObject{
     Q_OBJECT
+private:
+    int bullet_count=0;
 public:
     GameState();
     std::vector<bullet*> bullets;
@@ -15,6 +17,7 @@ public:
     void addBullet(bullet * new_bullet);
     void addPlayer(player * new_player);
     void updatePlayer(int id, QPoint new_pos);
+    void createBullet(bool team1,qreal x,qreal y);
     QJsonDocument getJsonDocFromGameState();
 };
 

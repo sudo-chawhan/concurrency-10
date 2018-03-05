@@ -16,7 +16,7 @@ public:
     GameState *gameState;
     void sendTextMessageToServer(QString message);
     void sendBinaryMessageToServer(QByteArray message);
-    int id;
+    int main_id;
 
 private slots:
     void onConnected();

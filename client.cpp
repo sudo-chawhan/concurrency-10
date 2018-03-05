@@ -52,12 +52,12 @@ void Client::closed()
 }
 
 void Client::onTextMessageReceived(QString message){
-
+    // init := for assigning main id to the client
     qDebug()<<"server text message recieved";
     if(message.startsWith("init:")){
         qDebug()<<"init message recieved: "<<message;
         QString m_id = message.mid(5,message.size()-5);
-        id=m_id.toInt();
+        main_id=m_id.toInt();
     }
 }
 
@@ -67,8 +67,38 @@ void Client::onBinaryMessageReceived(QByteArray bytes)
     qDebug()<<"from server...";
     qDebug()<<doc.toJson();
     QJsonObject item=doc.object();
+    QJsonArray bulletArray = item["bullets"].toArray();
     QJsonArray playerArray = item["players"].toArray();
+
     qDebug()<<"64";
+    foreach(const QJsonValue & value , bulletArray)
+            {
+               QJsonObject obj = value.toObject();
+               int bullet_id=obj["id"].toInt();
+               bool team_here_a=obj["team"].toBool();
+               int flag=0;
+               // for updating bullets
+               for(auto q = gameState->bullets.begin() ; q != gameState->bullets.end() ; q++)
+               {
+                   if((*q)->id==bullet_id)
+                   {
+                       // for updating bullet
+                       //gameState->updatePlayer(bullet_id,QPoint(obj["posX"].toInt(),obj["posY"].toInt()));
+                       flag=1;
+                   }
+               }
+
+               // for creating new bullets
+               if(flag==0)
+               {
+                   qDebug()<<"new bullet added! id:"<<bullet_id;
+                   //this implies new player joins the game isko sochna hai apan ko
+                   bullet *new_bullet = new bullet(bullet_id, team_here_a);
+                   new_bullet->setPos(obj["posX"].toDouble(),obj["posY"].toDouble());
+                   gameState->addBullet(new_bullet);
+                   game->scene->addItem(new_bullet);
+               }
+            }
     foreach(const QJsonValue & value , playerArray)
             {
                 qDebug()<<"67";
@@ -80,7 +110,7 @@ void Client::onBinaryMessageReceived(QByteArray bytes)
                for(auto q = gameState->players.begin() ; q != gameState->players.end() ; q++)
                {
                    qDebug()<<"75";
-                   if((*q)->get_id()==player_id)
+                   if((*q)->id==player_id)
                    {
                        qDebug()<<"76";
                        gameState->updatePlayer(player_id,QPoint(obj["posX"].toInt(),obj["posY"].toInt()));

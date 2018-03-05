@@ -75,9 +75,6 @@ void Server::onNewConnection()
     connect(pSocket, &QWebSocket::binaryMessageReceived,
             this, &Server::onBinaryMessageFromClient);
 
-//    connect(pSocket, &QWebSocket::binaryMessageReceived,
-//            this, &Server::onBinaryMessage);
-
     connect(pSocket, &QWebSocket::disconnected,
             this, &Server::socketDisconnected);
 
@@ -119,6 +116,9 @@ void Server::onBinaryMessageFromClient(QByteArray message){
     if(key=="RIGHT"){
         gameState->players.at(id)->moveRight();
     }
+    if(key=="SPACE"){
+        gameState->createBullet(gameState->players.at(id)->team,gameState->players.at(id)->pos().x(),gameState->players.at(id)->pos().y());
+    }
 
     QJsonDocument doc = gameState->getJsonDocFromGameState();
     QByteArray bytes = doc.toJson();
@@ -131,16 +131,10 @@ void Server::onBinaryMessageFromClient(QByteArray message){
 
 }
 
-
-
 void Server::onTextMessageFromClient(const QString &message)
 {
     qDebug()<<"from client: "<<message;
-//    QWebSocket *pSender = qobject_cast<QWebSocket *>(sender());
-//    for (QWebSocket *pClient : qAsConst(m_clients)) {
-//        if (pClient != pSender) //don't echo message back to sender
-//            pClient->sendTextMessage(message);
-//    }
+
 }
 
 void Server::socketDisconnected()

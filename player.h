@@ -8,16 +8,11 @@
 class player:public QObject, public QGraphicsPixmapItem{
     Q_OBJECT
 public:
-    bool team_a,team_b;
-    player(int id,bool team_a,QGraphicsItem * parent=0);
-//    void keyPressEvent(QKeyEvent * event);
-    bool find_a();
-    bool find_b();
-    int get_id();
+    player(int id,bool team1,QGraphicsItem * parent=0);
+    bool team;
+    int id;
     void moveLeft();
     void moveRight();
-private:
-    int id;
 };
 
 #endif // PLAYER_H
