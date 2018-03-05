@@ -38,29 +38,41 @@ void bullet::move(){
         setPos(x(),y()-10);
     else
         setPos(x(),y()+10);
-    // get a list of all the items currently colliding with this bullet
-//    QList<QGraphicsItem *> colliding_items = collidingItems();
-//    std::vector<bullet*> ::iterator it=find((game->gamestate->bullets).begin(),(game->gamestate->bullets).end(),this);
-//    auto pos_in_vec = std::distance((game->gamestate->bullets).begin(), it);
 
-//    // if one of the colliding items is an Enemy, destroy both the bullet and the enemy
-//    for (int i = 0, n = colliding_items.size(); i < n; ++i){
-//        if (typeid(*(colliding_items[i])) == typeid(player)){
-//            // increase the score
-//           // game->score->increase();
+    if(pos().y()<0 || pos().y()>600){
+        // delete this bullet from bullets vector
 
-//            // remove them from the scene (still on the heap)
-//            scene()->removeItem(colliding_items[i]);
-//            scene()->removeItem(this);
+        // get a list of all the items currently colliding with this bullet
+        QList<QGraphicsItem *> colliding_items = collidingItems();
+        // find the index of the bullet in bullets vector
+        std::vector<bullet*> ::iterator it=find((game->gamestate->bullets).begin(),(game->gamestate->bullets).end(),this);
+        auto pos_in_vec = std::distance((game->gamestate->bullets).begin(), it);
+        (game->gamestate->bullets).erase((game->gamestate->bullets).begin()+pos_in_vec);
+    }
 
-//            // delete them from the heap to save memory
-//            delete colliding_items[i];
-//            delete this;
 
-//            // return (all code below refers to a non existint bullet)
-//            return;
-//        }
-//    }
+
+    // if one of the colliding items is an Enemy, destroy both the bullet and the enemy
+    for (int i = 0, n = colliding_items.size(); i < n; ++i){
+
+        // collided with an enemy team
+        if (typeid(*(colliding_items[i])) == typeid(player) && !team==(*(colliding_items[i]))->team){
+
+            // delete this bullet from bullets vector
+
+            // get a list of all the items currently colliding with this bullet
+            QList<QGraphicsItem *> colliding_items = collidingItems();
+            // find the index of the bullet in bullets vector
+            std::vector<bullet*> ::iterator it=find((game->gamestate->bullets).begin(),(game->gamestate->bullets).end(),this);
+            auto pos_in_vec = std::distance((game->gamestate->bullets).begin(), it);
+            (game->gamestate->bullets).erase((game->gamestate->bullets).begin()+pos_in_vec);
+
+            // make colliding item's isDead=true
+
+            // return (all code below refers to a non existint bullet)
+            return;
+        }
+    }
 
     // if there was no collision with an Enemy, move the bullet forward
 //    if(this->a_finder==true){

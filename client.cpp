@@ -46,6 +46,19 @@ void Client::sendBinaryMessageToServer(QByteArray message)
     m_client_socket.sendBinaryMessage(message);
 }
 
+// check if id's bullet is available is json array
+bool Client::checkBullet(QJsonArray bulletArray,int id)
+{
+    foreach(const QJsonValue & value , bulletArray){
+        QJsonObject obj = value.toObject();
+        int bullet_id=obj["id"].toInt();
+        if(id==bullet_id){
+            return true;
+        }
+    }
+    return false;
+}
+
 void Client::closed()
 {
     m_client_socket.close();
@@ -70,49 +83,55 @@ void Client::onBinaryMessageReceived(QByteArray bytes)
     QJsonArray bulletArray = item["bullets"].toArray();
     QJsonArray playerArray = item["players"].toArray();
 
-    qDebug()<<"64";
+    // check if to delete a bullet, can be done in ****** parallel******
+
+    for(auto q = gameState->bullets.begin() ; q != gameState->bullets.end() ; q++)
+    {
+        // if bullet does not exist then delete it
+        if(!checkBullet(bulletArray,(*it)->id))
+        {
+//***            // delete bullet
+        }
+    }
+
     foreach(const QJsonValue & value , bulletArray)
             {
                QJsonObject obj = value.toObject();
                int bullet_id=obj["id"].toInt();
-               bool team_here_a=obj["team"].toBool();
-               int flag=0;
-               // for updating bullets
+               bool team_a=obj["team"].toBool();
+               bool flag=false;
+               // for checking if not new bullet
                for(auto q = gameState->bullets.begin() ; q != gameState->bullets.end() ; q++)
                {
                    if((*q)->id==bullet_id)
                    {
-                       // for updating bullet
-                       //gameState->updatePlayer(bullet_id,QPoint(obj["posX"].toInt(),obj["posY"].toInt()));
-                       flag=1;
+                       flag=true;
                    }
                }
 
-               // for creating new bullets
-               if(flag==0)
+               // for creating new bullets, if new
+               if(flag==false)
                {
                    qDebug()<<"new bullet added! id:"<<bullet_id;
-                   //this implies new player joins the game isko sochna hai apan ko
-                   bullet *new_bullet = new bullet(bullet_id, team_here_a);
+                   //to add new bullet
+                   bullet *new_bullet = new bullet(bullet_id, team_a);
                    new_bullet->setPos(obj["posX"].toDouble(),obj["posY"].toDouble());
                    gameState->addBullet(new_bullet);
                    game->scene->addItem(new_bullet);
+                   // new bullet added
                }
             }
+
     foreach(const QJsonValue & value , playerArray)
             {
-                qDebug()<<"67";
                QJsonObject obj = value.toObject();
                int player_id=obj["id"].toInt();
-               bool team_here_a=obj["team"].toBool();
+               bool team_a=obj["team"].toBool();
                int flag=0;
-               qDebug()<<"72";
                for(auto q = gameState->players.begin() ; q != gameState->players.end() ; q++)
                {
-                   qDebug()<<"75";
                    if((*q)->id==player_id)
                    {
-                       qDebug()<<"76";
                        gameState->updatePlayer(player_id,QPoint(obj["posX"].toInt(),obj["posY"].toInt()));
                        flag=1;
                    }
@@ -120,15 +139,12 @@ void Client::onBinaryMessageReceived(QByteArray bytes)
 
                if(flag==0)
                {
-                   qDebug()<<"83";
                    //this implies new player joins the game isko sochna hai apan ko
-                   player *new_player = new player(player_id, team_here_a);
-                   qDebug()<<"86";
+                   player *new_player = new player(player_id, team_a);
                    new_player->setPos(obj["posX"].toDouble(),obj["posY"].toDouble());
                    gameState->addPlayer(new_player);
                    new_player->setPixmap(QPixmap(":/images/player.png"));
                    game->scene->addItem(new_player);
-                   qDebug()<<"88";
                }
             }
     qDebug()<<"client gamestate after server init json...";
