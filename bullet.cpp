@@ -91,8 +91,17 @@ void bullet::move(){
                 auto pos_in_vec = std::distance((server->gameState->bullets).begin(), it);
                 (server->gameState->bullets).erase((server->gameState->bullets).begin()+pos_in_vec);
                 scene()->removeItem(this);
+
+                // make colliding item dead
+                if(team==true){
+                    // player is of team false
+                    dynamic_cast<player*>(colliding_items[i])->setPos(400,100);
+                }else{
+                    // player is of team true
+                    dynamic_cast<player*>(colliding_items[i])->setPos(400,500);
+                }
                 delete this;
-                // make colliding item's isDead=true
+
                 qDebug()<<"player is dead!";
                 // return (all code below refers to a non existint bullet)
                 return;
