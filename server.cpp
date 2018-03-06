@@ -139,8 +139,8 @@ void Server::onBinaryMessageFromClient(QByteArray message){
     if(key=="DOWN"){
         gameState->players.at(id)->moveDown();
     }
-    if(key=="SPACE"){
-        bullet *new_bullet = gameState->createBullet(gameState->players.at(id)->team,gameState->players.at(id)->pos().x(),gameState->players.at(id)->pos().y());
+    if(key=="W"||key=="A"||key=="S"||key=="D"){
+        bullet *new_bullet = gameState->createBullet(key,gameState->players.at(id)->team,gameState->players.at(id)->pos().x(),gameState->players.at(id)->pos().y());
         scene->addItem(new_bullet);
     }
 

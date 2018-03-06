@@ -8,6 +8,7 @@
 #include <QDebug>
 #include <iterator>
 #include<typeinfo>
+#include "enums.h"
 #include "server.h"
 #include "player.h"
 #include "player_teama.h"
@@ -25,7 +26,8 @@ void bullet::delete_bullet()
 
 }
 
-bullet::bullet(int id1,bool team1,QGraphicsItem *parent):QObject(),QGraphicsPixmapItem(parent){
+bullet::bullet(enums::direc dirc,int id1,bool team1,QGraphicsItem *parent):QObject(),QGraphicsPixmapItem(parent){
+    dir = dirc;
     is_server = isServer;
     id =id1;
     team = team1;
@@ -43,10 +45,17 @@ bullet::bullet(int id1,bool team1,QGraphicsItem *parent):QObject(),QGraphicsPixm
 
 void bullet::move(){
     //qDebug()<<"iterate move";
-    if(team)
-        setPos(x(),y()-10);
-    else
-        setPos(x(),y()+10);
+    switch(dir){
+        case enums::direc::DOWN:setPos(x(),y()+20);
+                    break;
+        case enums::direc::UP:setPos(x(),y()-20);
+                    break;
+        case enums::direc::LEFT:setPos(x()-20,y());
+                    break;
+        case enums::direc::RIGHT:setPos(x()+20,y());
+                    break;
+    }
+
     //qDebug()<<"colliding items in client:";
     //QList<QGraphicsItem *> colliding_items = collidingItems();
     //qDebug()<<colliding_items.size();
@@ -57,7 +66,7 @@ void bullet::move(){
 
        /// qDebug()<<"is server!";
 
-        if(pos().y()<screen_height || pos().y()>screen_height){
+        if(pos().y()<0 || pos().y()>screen_height){
             qDebug()<<"is out of bound";
             // delete this bullet from bullets vector
 

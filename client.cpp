@@ -5,6 +5,7 @@
 #include <QBrush>
 #include <QImage>
 #include <QJsonDocument>
+#include "enums.h"
 #include <QJsonObject>
 #include "game.h"
 
@@ -119,8 +120,9 @@ void Client::onBinaryMessageReceived(QByteArray bytes)
                if(flag==false)
                {
                    qDebug()<<"new bullet added! id:"<<bullet_id;
+
                    //to add new bullet
-                   bullet *new_bullet = new bullet(bullet_id, team_a);
+                   bullet *new_bullet = new bullet(static_cast<enums::direc>(obj["dir"].toInt()),bullet_id, team_a);
                    new_bullet->setPos(obj["posX"].toDouble(),obj["posY"].toDouble());
                    gameState->addBullet(new_bullet);
                    game->scene->addItem(new_bullet);

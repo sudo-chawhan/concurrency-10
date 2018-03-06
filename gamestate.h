@@ -3,6 +3,7 @@
 #include <vector>
 #include <QJsonObject>
 #include <QJsonDocument>
+#include <string>
 #include "bullet.h"
 #include "player.h"
 #include "player_teama.h"
@@ -20,7 +21,7 @@ public:
     void addBullet(bullet * new_bullet);
     void addPlayer(player * new_player);
     void updatePlayer(int id, QPoint new_pos);
-    bullet* createBullet(bool team1, qreal x, qreal y);
+    bullet* createBullet(QString dir,bool team1, qreal x, qreal y);
     QJsonDocument getJsonDocFromGameState();
 };
 

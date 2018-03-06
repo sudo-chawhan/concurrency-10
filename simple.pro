@@ -21,8 +21,6 @@ SOURCES += main.cpp \
     inputhandler.cpp \
     server.cpp \
     client.cpp \
-    player_teama.cpp \
-    player_teamb.cpp \
     mainwindow.cpp \
     dialog.cpp \
     threadpool.cpp \
@@ -44,7 +42,8 @@ HEADERS  += \
     threadpool.h\
     serverscreen.h \
     wall.h \
-    global.h
+    global.h \
+    enums.h
 
 
 FORMS    +=

@@ -62,12 +62,39 @@ void InputHandler::keyPressEvent(QKeyEvent *event){
             client->sendBinaryMessageToServer(bytes);
 
     }
-    // shoot with the spacebar
-    else if (event->key() == Qt::Key_Space){
+    // shooting bullets
+    else if (event->key() == Qt::Key_W){
          //create a bullet
         QJsonObject gamestate1;
         gamestate1.insert("id",client->main_id);
-        gamestate1.insert("key","SPACE");
+        gamestate1.insert("key","W");
+        QJsonDocument doc(gamestate1);
+        QByteArray bytes = doc.toJson();
+        client->sendBinaryMessageToServer(bytes);
+    }
+    else if (event->key() == Qt::Key_A){
+         //create a bullet
+        QJsonObject gamestate1;
+        gamestate1.insert("id",client->main_id);
+        gamestate1.insert("key","A");
+        QJsonDocument doc(gamestate1);
+        QByteArray bytes = doc.toJson();
+        client->sendBinaryMessageToServer(bytes);
+    }
+    else if (event->key() == Qt::Key_S){
+         //create a bullet
+        QJsonObject gamestate1;
+        gamestate1.insert("id",client->main_id);
+        gamestate1.insert("key","S");
+        QJsonDocument doc(gamestate1);
+        QByteArray bytes = doc.toJson();
+        client->sendBinaryMessageToServer(bytes);
+    }
+    else if (event->key() == Qt::Key_D){
+         //create a bullet
+        QJsonObject gamestate1;
+        gamestate1.insert("id",client->main_id);
+        gamestate1.insert("key","D");
         QJsonDocument doc(gamestate1);
         QByteArray bytes = doc.toJson();
         client->sendBinaryMessageToServer(bytes);
