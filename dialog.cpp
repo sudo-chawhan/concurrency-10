@@ -39,8 +39,9 @@ dialog::dialog(QWidget *parent)
  {
      isServer = true;
      server = new Server(3000);
-     ss = new serverScreen();
-
+     host_sc=new hostdialog("hihi");
+     host_sc->show();
+     this->hide();
  }
 
  void dialog::make_client()
