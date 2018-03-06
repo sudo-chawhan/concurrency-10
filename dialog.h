@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include <QLabel>
+#include "hostdialog.h"
 
 class dialog : public QDialog
 {
@@ -15,6 +16,8 @@ public:
 private slots:
      void make_server();
      void make_client();
+private:
+     hostdialog *host_sc;
 
 };
 
