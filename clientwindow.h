@@ -5,6 +5,7 @@
 #include<QString>
 #include <QDebug>
 #include "game.h"
+#include "gamewindow.h"
 
 extern Game * game;
 
@@ -20,6 +21,7 @@ public:
     explicit clientwindow(QWidget *parent = 0);
     ~clientwindow();
     QString ip;
+    gamewindow * game_selection;
 
 private slots:
     void on_pushButton_clicked();

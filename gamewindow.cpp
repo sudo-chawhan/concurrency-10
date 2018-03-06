@@ -13,17 +13,20 @@ gamewindow::~gamewindow()
     delete ui;
 }
 
-void gamewindow::on_radioButton_clicked()
-{
 
+void gamewindow::on_radioButton_toggled(bool checked)
+{
+    team=true;
+    qDebug()<<"team a selected";
 }
 
-void gamewindow::on_radioButton_2_clicked()
+void gamewindow::on_radioButton_2_toggled(bool checked)
 {
-
+    team=false;
+    qDebug()<<"team b selected";
 }
 
 void gamewindow::on_pushButton_clicked()
 {
-
+    //function for ready
 }

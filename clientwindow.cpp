@@ -19,7 +19,17 @@ clientwindow::~clientwindow()
 void clientwindow::on_pushButton_clicked()
 {
     ip=ui->lineEdit->text();
-    //if(ip=="hihi")
-    game =new Game();
+    //compare the ip with the given input
+    if(1)
+    {
+        game_selection=new gamewindow();
+        game_selection->show();
+        this->deleteLater();
+    }
+    else
+    {
+        qDebug()<<"ENTER THE CORRECT IP ADDRESSS";
+    }
+    //game =new Game();
 
 }
