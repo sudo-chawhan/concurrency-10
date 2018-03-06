@@ -57,16 +57,7 @@ bullet::bullet(enums::direc dirc,int id1,bool team1,QGraphicsItem *parent):QObje
 
 void bullet::move(){
     //qDebug()<<"iterate move";
-    switch(dir){
-        case enums::direc::DOWN:setPos(x(),y()+20);
-                    break;
-        case enums::direc::UP:setPos(x(),y()-20);
-                    break;
-        case enums::direc::LEFT:setPos(x()-20,y());
-                    break;
-        case enums::direc::RIGHT:setPos(x()+20,y());
-                    break;
-    }
+
 
     //qDebug()<<"colliding items in client:";
     //QList<QGraphicsItem *> colliding_items = collidingItems();
@@ -75,6 +66,17 @@ void bullet::move(){
 // // // // // // // // IF SERVER
 
     if(is_server){
+
+        switch(dir){
+            case enums::direc::DOWN:setPos(x(),y()+20);
+                        break;
+            case enums::direc::UP:setPos(x(),y()-20);
+                        break;
+            case enums::direc::LEFT:setPos(x()-20,y());
+                        break;
+            case enums::direc::RIGHT:setPos(x()+20,y());
+                        break;
+        }
 
        /// qDebug()<<"is server!";
 

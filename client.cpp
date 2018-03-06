@@ -49,16 +49,18 @@ void Client::sendBinaryMessageToServer(QByteArray message)
 }
 
 // check if id's bullet is available is json array
-bool Client::checkBullet(QJsonArray bulletArray,int id)
+int Client::checkBullet(QJsonArray bulletArray,int id)
 {
+    int i=0;
     foreach(const QJsonValue & value , bulletArray){
         QJsonObject obj = value.toObject();
         int bullet_id=obj["id"].toInt();
         if(id==bullet_id){
-            return true;
+            return i;
         }
+        i++;
     }
-    return false;
+    return -1;
 }
 
 void Client::closed()
@@ -99,13 +101,17 @@ void Client::onBinaryMessageReceived(QByteArray bytes)
     {
         auto q = gameState->bullets.at(i);
         // if bullet does not exist then delete it
-        if(!checkBullet(bulletArray,(q)->id))
+        int index=checkBullet(bulletArray,(q)->id);
+        if(index==-1)
         {
 //***            // delete bullet
             qDebug()<<"*******bullet deleted id:"<<(q->id);
             game->scene->removeItem(q);
             (gameState->bullets).erase((gameState->bullets).begin()+i);
             delete (q);
+        }else{
+            QJsonObject obj = bulletArray[index].toObject();
+            q->setPos(obj["posX"].toDouble(),obj["posY"].toDouble());
         }
 
     }

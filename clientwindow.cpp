@@ -20,11 +20,6 @@ void clientwindow::on_pushButton_clicked()
 {
     ip=ui->lineEdit->text();
     //if(ip=="hihi")
-    {
-        game =new Game();
-    }
-    //else
-    {
-        qDebug()<<"WRONG IP ADDRESS ENTERED";
-    }
+    game =new Game();
+
 }

@@ -17,7 +17,6 @@ public:
     // use mutex for both
     int playersReady=0;
     int playersConnected=0;
-
     explicit Server(quint16 port, QObject *parent = nullptr);
     virtual ~Server();
     GameState *gameState;
