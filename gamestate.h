@@ -7,6 +7,7 @@
 #include "player.h"
 #include "player_teama.h"
 #include "player_teamb.h"
+#include "global.h"
 
 class GameState: public QObject{
     Q_OBJECT

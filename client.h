@@ -6,7 +6,7 @@
 #include <QtCore/QObject>
 #include <QtWebSockets/QWebSocket>
 #include "gamestate.h"
-
+#include "global.h"
 class Client : public QObject
 {
     Q_OBJECT

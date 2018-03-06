@@ -4,6 +4,7 @@
 #include <QGraphicsPixmapItem>
 #include <QGraphicsItem>
 #include <QObject>
+#include "global.h"
 
 class bullet: public QObject,public QGraphicsPixmapItem {
     Q_OBJECT

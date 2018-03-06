@@ -57,7 +57,7 @@ void bullet::move(){
 
        /// qDebug()<<"is server!";
 
-        if(pos().y()<0 || pos().y()>600){
+        if(pos().y()<screen_height || pos().y()>screen_height){
             qDebug()<<"is out of bound";
             // delete this bullet from bullets vector
 
@@ -95,10 +95,10 @@ void bullet::move(){
                 // make colliding item dead
                 if(team==true){
                     // player is of team false
-                    dynamic_cast<player*>(colliding_items[i])->setPos(400,100);
+                    dynamic_cast<player*>(colliding_items[i])->setPos(start_b);
                 }else{
                     // player is of team true
-                    dynamic_cast<player*>(colliding_items[i])->setPos(400,500);
+                    dynamic_cast<player*>(colliding_items[i])->setPos(start_a);
                 }
                 delete this;
 

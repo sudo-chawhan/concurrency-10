@@ -10,6 +10,7 @@
 #include <vector>
 #include "gamestate.h"
 #include "client.h"
+#include "global.h"
 
 class InputHandler : public QGraphicsView
 {

@@ -9,6 +9,7 @@
 #include "gamestate.h"
 //#include "Score.h"
 //#include "Health.h"
+#include "global.h"
 
 class Game{
 public:

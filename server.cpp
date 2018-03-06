@@ -79,12 +79,12 @@ void Server::onNewConnection()
     if(gameState->players.size()==0){
         id=0;
         new_player = new player(id,true);
-        new_player->setPos(400,500); // TODO generalize to always be in the middle bottom of screen
+        new_player->setPos(start_a); // TODO generalize to always be in the middle bottom of screen
     }
    else{
         id=1;
         new_player = new player(id,false);
-        new_player->setPos(400,100); // TODO generalize to always be in the middle bottom of screen
+        new_player->setPos(start_b); // TODO generalize to always be in the middle bottom of screen
     }// make the player focusable and set it to be the current focus
 
     scene->addItem(new_player);
@@ -132,6 +132,12 @@ void Server::onBinaryMessageFromClient(QByteArray message){
     }
     if(key=="RIGHT"){
         gameState->players.at(id)->moveRight();
+    }
+    if(key=="UP"){
+        gameState->players.at(id)->moveUp();
+    }
+    if(key=="DOWN"){
+        gameState->players.at(id)->moveDown();
     }
     if(key=="SPACE"){
         bullet *new_bullet = gameState->createBullet(gameState->players.at(id)->team,gameState->players.at(id)->pos().x(),gameState->players.at(id)->pos().y());

@@ -2,7 +2,7 @@
 #include <QDebug>
 #include <QThread>
 
-threadPool::threadPool(int number_of_threads = 0)
+threadPool::threadPool(int number_of_threads )
 {
     if(number_of_threads <= 0)
     {

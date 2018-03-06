@@ -3,7 +3,7 @@
 
 #include <QDialog>
 #include <QLabel>
-
+#include "global.h"
 class dialog : public QDialog
 {
     Q_OBJECT

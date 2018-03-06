@@ -25,12 +25,11 @@ SOURCES += main.cpp \
     player_teamb.cpp \
     mainwindow.cpp \
     dialog.cpp \
-<<<<<<< HEAD
-    threadpool.cpp
-=======
+    threadpool.cpp \
     serverscreen.cpp \
-    wall.cpp
->>>>>>> feature3
+    wall.cpp \
+    global.cpp
+
 
 HEADERS  += \
     game.h \
@@ -42,13 +41,11 @@ HEADERS  += \
     client.h \
     mainwindow.h \
     dialog.h \
-<<<<<<< HEAD
-    threadpool.h
-=======
+    threadpool.h\
     serverscreen.h \
     wall.h \
     global.h
->>>>>>> feature3
+
 
 FORMS    +=
 

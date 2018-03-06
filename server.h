@@ -4,6 +4,7 @@
 #include <QtCore/QObject>
 #include <QtCore/QList>
 #include "gamestate.h"
+#include "global.h"
 
 QT_FORWARD_DECLARE_CLASS(QWebSocketServer)
 QT_FORWARD_DECLARE_CLASS(QWebSocket)
