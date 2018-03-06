@@ -6,6 +6,7 @@
 #include <QImage>
 #include <QJsonDocument>
 #include <QJsonObject>
+#include <typeinfo>
 #include "game.h"
 
 extern Game *game;
