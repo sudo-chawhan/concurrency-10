@@ -92,7 +92,7 @@ void Client::onBinaryMessageReceived(QByteArray bytes)
         if(!checkBullet(bulletArray,(q)->id))
         {
 //***            // delete bullet
-            qDebug()<<"*******bullet deleted id:"<<((q)->id);
+            qDebug()<<"*******bullet deleted id:"<<(q->id);
             game->scene->removeItem(q);
             (gameState->bullets).erase((gameState->bullets).begin()+i);
             delete (q);
@@ -162,6 +162,4 @@ void Client::onBinaryMessageReceived(QByteArray bytes)
                    game->scene->addItem(new_player);
                }
             }
-    //qDebug()<<"client gamestate after server init json...";
-    //qDebug()<<gameState->getJsonDocFromGameState().toJson();
 }

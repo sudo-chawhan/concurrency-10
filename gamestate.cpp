@@ -7,12 +7,7 @@
 
 GameState::GameState()
 {
-    //qDebug()<<bullets.size();
-    //qDebug()<<bullets.size();
-
     bullets = std::vector<bullet*>();
-    //qDebug()<<bullets.size();
-
     players = std::vector<player*>();
 
 }
