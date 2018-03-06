@@ -25,9 +25,12 @@ SOURCES += main.cpp \
     threadpool.cpp \
     serverscreen.cpp \
     wall.cpp \
+<<<<<<< HEAD
     hostdialog.cpp \
     clientwindow.cpp \
     gamewindow.cpp \
+=======
+>>>>>>> feature3
     global.cpp
 
 
@@ -44,9 +47,12 @@ HEADERS  += \
     serverscreen.h \
     wall.h \
     global.h \
+<<<<<<< HEAD
     hostdialog.h \
     clientwindow.h \
     gamewindow.h  \
+=======
+>>>>>>> feature3
     enums.h
 
 
