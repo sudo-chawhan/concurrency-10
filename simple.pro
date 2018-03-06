@@ -28,7 +28,8 @@ SOURCES += main.cpp \
     serverscreen.cpp \
     wall.cpp \
     hostdialog.cpp \
-    clientwindow.cpp
+    clientwindow.cpp \
+    gamewindow.cpp
 
 HEADERS  += \
     game.h \
@@ -44,11 +45,13 @@ HEADERS  += \
     wall.h \
     global.h \
     hostdialog.h \
-    clientwindow.h
+    clientwindow.h \
+    gamewindow.h
 
 FORMS    += \
     hostdialog.ui \
-    clientwindow.ui
+    clientwindow.ui \
+    gamewindow.ui
 
 RESOURCES += \
     rsc.qrc
