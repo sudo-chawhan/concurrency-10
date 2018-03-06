@@ -1,6 +1,7 @@
 #include <QtWidgets>
 #include <QGridLayout>
 #include <QtGui>
+#include <QDebug>
 #include "dialog.h"
 #include "serverscreen.h"
 #include "game.h"
@@ -39,12 +40,14 @@ dialog::dialog(QWidget *parent)
  {
      isServer = true;
      server = new Server(3000);
-     host_sc=new hostdialog("hihi");
+     hostdialog * host_sc=new hostdialog("hihi");
      host_sc->show();
      this->hide();
  }
 
  void dialog::make_client()
  {
-    game = new Game();
+    clientwindow *client=new clientwindow();
+    client->show();
+    this->hide();
  }
