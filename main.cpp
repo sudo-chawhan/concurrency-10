@@ -13,13 +13,10 @@ int main(int argc, char *argv[]){
     isServer = false;
     //server= new Server(3000);
 
-<<<<<<< HEAD
-=======
-//    Server *ser = new Server(3000);
+    //Server *ser = new Server(3000);
 
->>>>>>> 5b1e8c4445ad304263519aa0065ae8d3a277020f
     //game = new Game();
-//    game->show();
+    //game->show();
     //mainwindow window;
     //window.show();
     dialog dialog1;
