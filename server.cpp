@@ -1,9 +1,11 @@
 #include "server.h"
 
 #include <QtWebSockets>
+#include <QGraphicsScene>
 #include <QtCore>
 #include <QDebug>
 #include <string>
+#include <QTimer>
 
 #include "player.h"
 #include "player_teama.h"
@@ -11,6 +13,8 @@
 
 #include <cstdio>
 using namespace std;
+
+extern QGraphicsScene *scene;
 
 QT_USE_NAMESPACE
 
@@ -35,6 +39,7 @@ Server::Server(quint16 port, QObject *parent) :
         QTextStream(stdout) << "Chat Server listening on port " << port << '\n';
         connect(m_pWebSocketServer, &QWebSocketServer::newConnection,
                 this, &Server::onNewConnection);
+        qDebug()<<"passed server onnewconnnection";
     }
 }
 
@@ -44,7 +49,24 @@ Server::~Server()
 }
 
 void Server::startGameLoop(){
+    QTimer * timer = new QTimer(this);
+    connect(timer,SIGNAL(timeout()),this,SLOT(sendGameStateToClients()));
 
+    // start the timer
+    timer->start(50);
+}
+
+void Server::sendGameStateToClients(){
+    QJsonDocument doc = gameState->getJsonDocFromGameState();
+    QByteArray bytes = doc.toJson();
+
+    //qDebug()<<"server sent json message at game init:";
+    //qDebug()<<bytes;
+
+    for (QList<QWebSocket*>::iterator i = m_clients.begin(); i != m_clients.end(); i++)
+    {
+          (*i)->sendBinaryMessage(bytes);
+    }
 }
 
 void Server::onNewConnection()
@@ -56,14 +78,16 @@ void Server::onNewConnection()
     player *new_player;
     if(gameState->players.size()==0){
         id=0;
-        new_player = new player_teama(id,true);
+        new_player = new player(id,true);
         new_player->setPos(400,500); // TODO generalize to always be in the middle bottom of screen
     }
    else{
         id=1;
-        new_player = new player_teamb(id,false);
+        new_player = new player(id,false);
         new_player->setPos(400,100); // TODO generalize to always be in the middle bottom of screen
     }// make the player focusable and set it to be the current focus
+
+    scene->addItem(new_player);
 
     gameState->players.push_back(new_player);
 
@@ -90,16 +114,7 @@ void Server::onNewConnection()
     // if all clients are done start game loop
     // ...
     if(id==1){
-        QJsonDocument doc = gameState->getJsonDocFromGameState();
-        QByteArray bytes = doc.toJson();
-
-        qDebug()<<"server sent json message at game init:";
-        qDebug()<<bytes;
-
-        for (QList<QWebSocket*>::iterator i = m_clients.begin(); i != m_clients.end(); i++)
-        {
-              (*i)->sendBinaryMessage(bytes);
-        }
+        startGameLoop();
     }
 
 
@@ -119,7 +134,8 @@ void Server::onBinaryMessageFromClient(QByteArray message){
         gameState->players.at(id)->moveRight();
     }
     if(key=="SPACE"){
-        gameState->createBullet(gameState->players.at(id)->team,gameState->players.at(id)->pos().x(),gameState->players.at(id)->pos().y());
+        bullet *new_bullet = gameState->createBullet(gameState->players.at(id)->team,gameState->players.at(id)->pos().x(),gameState->players.at(id)->pos().y());
+        scene->addItem(new_bullet);
     }
 
     QJsonDocument doc = gameState->getJsonDocFromGameState();
