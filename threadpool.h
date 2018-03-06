@@ -12,7 +12,7 @@
 class threadPool
 {
 public:
-    threadPool(int thread_count);
+    threadPool(int thread_count=0);
     ~threadPool();
     void thread_adder();
     void thread_assigner(std::function<void()> working_function);

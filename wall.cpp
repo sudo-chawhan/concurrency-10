@@ -5,13 +5,7 @@
 
 #include <QDebug>
 
-wall::wall()
+wall::wall(): QGraphicsRectItem()
 {
-    int random_number = rand() % 700;
-    int yolo = rand() % 700;
-    setPos(random_number,yolo);
-
-    // drew the rect
-    setRect(0,0,100,10);
 
 }

@@ -8,6 +8,7 @@
 #include <QDebug>
 #include <iterator>
 #include<typeinfo>
+#include "enums.h"
 #include "server.h"
 #include "player.h"
 #include "player_teama.h"
@@ -25,12 +26,25 @@ void bullet::delete_bullet()
 
 }
 
-bullet::bullet(int id1,bool team1,QGraphicsItem *parent):QObject(),QGraphicsPixmapItem(parent){
+bullet::bullet(enums::direc dirc,int id1,bool team1,QGraphicsItem *parent):QObject(),QGraphicsPixmapItem(parent){
+    dir = dirc;
     is_server = isServer;
     id =id1;
     team = team1;
     // draw graphics
-    setPixmap(QPixmap(":/images/bullet.png"));
+    if(team)
+        setPixmap(QPixmap(":/images/bullet_red.png"));
+    else
+        setPixmap(QPixmap(":/images/bullet_blue.png"));
+    if(dirc==enums::direc::DOWN){
+        setTransformOriginPoint(0,0);
+        setRotation(-90);
+    }
+    if(dirc==enums::direc::UP){
+        setTransformOriginPoint(0,0);
+        setRotation(90);
+    }
+
 
 
     // make/connect a timer to move() the bullet every so often
@@ -43,10 +57,17 @@ bullet::bullet(int id1,bool team1,QGraphicsItem *parent):QObject(),QGraphicsPixm
 
 void bullet::move(){
     //qDebug()<<"iterate move";
-    if(team)
-        setPos(x(),y()-10);
-    else
-        setPos(x(),y()+10);
+    switch(dir){
+        case enums::direc::DOWN:setPos(x(),y()+20);
+                    break;
+        case enums::direc::UP:setPos(x(),y()-20);
+                    break;
+        case enums::direc::LEFT:setPos(x()-20,y());
+                    break;
+        case enums::direc::RIGHT:setPos(x()+20,y());
+                    break;
+    }
+
     //qDebug()<<"colliding items in client:";
     //QList<QGraphicsItem *> colliding_items = collidingItems();
     //qDebug()<<colliding_items.size();
@@ -57,22 +78,22 @@ void bullet::move(){
 
        /// qDebug()<<"is server!";
 
-        if(pos().y()<0 || pos().y()>600){
-            qDebug()<<"is out of bound";
-            // delete this bullet from bullets vector
+//        if(pos().y()<0 || pos().y()>screen_height){
+//            qDebug()<<"is out of bound";
+//            // delete this bullet from bullets vector
 
 
-            // find the index of the bullet in bullets vector
-            std::vector<bullet*> ::iterator it=find((server->gameState->bullets).begin(),(server->gameState->bullets).end(),this);
-            auto pos_in_vec = std::distance((server->gameState->bullets).begin(), it);
-            qDebug()<<"bullets size before: "<<(server->gameState->bullets).size();
-            (server->gameState->bullets).erase((server->gameState->bullets).begin()+pos_in_vec);
-            qDebug()<<"bullets size after: "<<(server->gameState->bullets).size();
-            scene()->removeItem(this);
-            delete this;
+//            // find the index of the bullet in bullets vector
+//            std::vector<bullet*> ::iterator it=find((server->gameState->bullets).begin(),(server->gameState->bullets).end(),this);
+//            auto pos_in_vec = std::distance((server->gameState->bullets).begin(), it);
+//            qDebug()<<"bullets size before: "<<(server->gameState->bullets).size();
+//            (server->gameState->bullets).erase((server->gameState->bullets).begin()+pos_in_vec);
+//            qDebug()<<"bullets size after: "<<(server->gameState->bullets).size();
+//            scene()->removeItem(this);
+//            delete this;
 
-            return;
-        }
+//            return;
+//        }
 
         // get a list of all the items currently colliding with this bullet
         QList<QGraphicsItem *> colliding_items = collidingItems();
@@ -95,14 +116,26 @@ void bullet::move(){
                 // make colliding item dead
                 if(team==true){
                     // player is of team false
-                    dynamic_cast<player*>(colliding_items[i])->setPos(400,100);
+                    dynamic_cast<player*>(colliding_items[i])->setPos(start_b);
                 }else{
                     // player is of team true
-                    dynamic_cast<player*>(colliding_items[i])->setPos(400,500);
+                    dynamic_cast<player*>(colliding_items[i])->setPos(start_a);
                 }
                 delete this;
 
                 qDebug()<<"player is dead!";
+                // return (all code below refers to a non existint bullet)
+                return;
+            }
+            if(typeid(*(colliding_items[i])) == typeid(QGraphicsRectItem)){
+                // delete this bullet from bullets vector
+
+                // find the index of the bullet in bullets vector
+                std::vector<bullet*> ::iterator it=find((server->gameState->bullets).begin(),(server->gameState->bullets).end(),this);
+                auto pos_in_vec = std::distance((server->gameState->bullets).begin(), it);
+                (server->gameState->bullets).erase((server->gameState->bullets).begin()+pos_in_vec);
+                scene()->removeItem(this);
+
                 // return (all code below refers to a non existint bullet)
                 return;
             }

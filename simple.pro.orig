@@ -21,15 +21,22 @@ SOURCES += main.cpp \
     inputhandler.cpp \
     server.cpp \
     client.cpp \
+<<<<<<< HEAD
     player_teama.cpp \
     player_teamb.cpp \
-    mainwindow.cpp \
-    dialog.cpp \
-<<<<<<< HEAD
-    threadpool.cpp
 =======
+>>>>>>> feature3
+    dialog.cpp \
+    threadpool.cpp \
     serverscreen.cpp \
-    wall.cpp
+    wall.cpp \
+<<<<<<< HEAD
+    hostdialog.cpp \
+    clientwindow.cpp \
+    gamewindow.cpp
+=======
+    global.cpp
+
 >>>>>>> feature3
 
 HEADERS  += \
@@ -40,17 +47,30 @@ HEADERS  += \
     inputhandler.h \
     server.h \
     client.h \
-    mainwindow.h \
     dialog.h \
 <<<<<<< HEAD
-    threadpool.h
-=======
+    threadpool.h \
     serverscreen.h \
     wall.h \
-    global.h
->>>>>>> feature3
+    global.h \
+    hostdialog.h \
+    clientwindow.h \
+    gamewindow.h
+
+FORMS    += \
+    hostdialog.ui \
+    clientwindow.ui \
+    gamewindow.ui
+=======
+    threadpool.h\
+    serverscreen.h \
+    wall.h \
+    global.h \
+    enums.h
+
 
 FORMS    +=
+>>>>>>> feature3
 
 RESOURCES += \
     rsc.qrc
