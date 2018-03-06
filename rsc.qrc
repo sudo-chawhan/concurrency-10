@@ -7,5 +7,7 @@
         <file>player.png</file>
         <file>space_shipA.png</file>
         <file>space_shipB.png</file>
+        <file>bullet_blue.png</file>
+        <file>bullet_red.png</file>
     </qresource>
 </RCC>

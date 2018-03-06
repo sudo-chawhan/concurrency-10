@@ -160,7 +160,6 @@ void Client::onBinaryMessageReceived(QByteArray bytes)
 
                    new_player->setPos(obj["posX"].toDouble(),obj["posY"].toDouble());
                    gameState->addPlayer(new_player);
-                   new_player->setPixmap(QPixmap(":/images/player.png"));
                    game->scene->addItem(new_player);
                }
             }

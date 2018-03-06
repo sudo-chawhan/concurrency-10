@@ -10,9 +10,10 @@ player::player(int id1, bool team1,QGraphicsItem *parent): QGraphicsPixmapItem(p
 
     id=id1;
     team = team1;
-
+    //setTransformOriginPoint(x()+25,y()+25);
     // set graphic
-    setPixmap(QPixmap(":/images/player.png"));
+    if(team) setPixmap(QPixmap(":/images/space_shipA.png"));
+    else setPixmap(QPixmap(":/images/space_shipB.png"));
 }
 
 void player::moveLeft(){

@@ -32,7 +32,7 @@ Server::Server(quint16 port, QObject *parent) :
 {
     gameState = new GameState();
 
-    if (m_pWebSocketServer->listen(QHostAddress::Any, port))
+    if (m_pWebSocketServer->listen(QHostAddress("0.0.0.0"), port))
     {
 
         qDebug() << "Server's connecting URL : " << m_pWebSocketServer->serverUrl();
@@ -140,7 +140,7 @@ void Server::onBinaryMessageFromClient(QByteArray message){
         gameState->players.at(id)->moveDown();
     }
     if(key=="W"||key=="A"||key=="S"||key=="D"){
-        bullet *new_bullet = gameState->createBullet(key,gameState->players.at(id)->team,gameState->players.at(id)->pos().x(),gameState->players.at(id)->pos().y());
+        bullet *new_bullet = gameState->createBullet(key,gameState->players.at(id)->team,gameState->players.at(id)->pos().x()+25,gameState->players.at(id)->pos().y()+25);
         scene->addItem(new_bullet);
     }
 
