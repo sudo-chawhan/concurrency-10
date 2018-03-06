@@ -20,6 +20,7 @@ public:
     std::vector<player*> players;
     void addBullet(bullet * new_bullet);
     void addPlayer(player * new_player);
+    ///can put mutex
     void updatePlayer(int id, QPoint new_pos);
     bullet* createBullet(QString dir,bool team1, qreal x, qreal y);
     QJsonDocument getJsonDocFromGameState();
