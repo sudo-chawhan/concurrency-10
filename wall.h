@@ -3,6 +3,7 @@
 
 #include <QGraphicsRectItem>
 #include <QObject>
+#include "global.h"
 
 class wall: public QObject,public QGraphicsRectItem{
     Q_OBJECT

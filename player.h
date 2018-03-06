@@ -3,6 +3,7 @@
 #include <QGraphicsPixmapItem>
 #include <QObject>
 #include <QGraphicsItem>
+#include "global.h"
 
 class player:public QObject, public QGraphicsPixmapItem{
     Q_OBJECT
@@ -12,6 +13,8 @@ public:
     int id;
     void moveLeft();
     void moveRight();
+    void moveUp();
+    void moveDown();
 };
 
 #endif // PLAYER_H

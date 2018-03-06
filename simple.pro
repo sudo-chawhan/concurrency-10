@@ -21,15 +21,15 @@ SOURCES += main.cpp \
     inputhandler.cpp \
     server.cpp \
     client.cpp \
-    player_teama.cpp \
-    player_teamb.cpp \
     dialog.cpp \
     threadpool.cpp \
     serverscreen.cpp \
     wall.cpp \
     hostdialog.cpp \
     clientwindow.cpp \
-    gamewindow.cpp
+    gamewindow.cpp \
+    global.cpp
+
 
 HEADERS  += \
     game.h \
@@ -40,13 +40,15 @@ HEADERS  += \
     server.h \
     client.h \
     dialog.h \
-    threadpool.h \
+    threadpool.h\
     serverscreen.h \
     wall.h \
     global.h \
     hostdialog.h \
     clientwindow.h \
-    gamewindow.h
+    gamewindow.h  \
+    enums.h
+
 
 FORMS    += \
     hostdialog.ui \

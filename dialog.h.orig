@@ -3,10 +3,13 @@
 
 #include <QDialog>
 #include <QLabel>
+<<<<<<< HEAD
 #include "hostdialog.h"
 #include "clientwindow.h"
 
+=======
 #include "global.h"
+>>>>>>> feature3
 class dialog : public QDialog
 {
     Q_OBJECT

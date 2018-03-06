@@ -5,6 +5,7 @@
 #include <QBrush>
 #include <QImage>
 #include <QJsonDocument>
+#include "enums.h"
 #include <QJsonObject>
 #include <typeinfo>
 #include "game.h"
@@ -72,13 +73,21 @@ void Client::onTextMessageReceived(QString message){
         qDebug()<<"init message recieved: "<<message;
         QString m_id = message.mid(5,message.size()-5);
         main_id=m_id.toInt();
+
+    ///// send ready to server
+        std::string init_messsage="ready:";
+        init_messsage+=std::to_string(main_id);
+        m_client_socket.sendTextMessage(QString::fromStdString(init_messsage));
+
     }
+
+
 }
 
 void Client::onBinaryMessageReceived(QByteArray bytes)
 {
     QJsonDocument doc = QJsonDocument::fromJson(bytes);
-    //qDebug()<<"from server...";
+    qDebug()<<"from server...";
     //qDebug()<<doc.toJson();
     QJsonObject item=doc.object();
     QJsonArray bulletArray = item["bullets"].toArray();
@@ -120,8 +129,9 @@ void Client::onBinaryMessageReceived(QByteArray bytes)
                if(flag==false)
                {
                    qDebug()<<"new bullet added! id:"<<bullet_id;
+
                    //to add new bullet
-                   bullet *new_bullet = new bullet(bullet_id, team_a);
+                   bullet *new_bullet = new bullet(static_cast<enums::direc>(obj["dir"].toInt()),bullet_id, team_a);
                    new_bullet->setPos(obj["posX"].toDouble(),obj["posY"].toDouble());
                    gameState->addBullet(new_bullet);
                    game->scene->addItem(new_bullet);
@@ -148,18 +158,10 @@ void Client::onBinaryMessageReceived(QByteArray bytes)
                {
                    player *new_player;
                    //adding new player
-                   if(team_a==true)
-                   {
-                       new_player = new player(player_id, team_a);
-                        if(typeid(new_player)==typeid(player_teama))
-                            qDebug()<<"im of type player teama";
-                   }
-                   else
-                       new_player = new player(player_id, team_a);
+                   new_player = new player(player_id, team_a);
 
                    new_player->setPos(obj["posX"].toDouble(),obj["posY"].toDouble());
                    gameState->addPlayer(new_player);
-                   new_player->setPixmap(QPixmap(":/images/player.png"));
                    game->scene->addItem(new_player);
                }
             }

@@ -4,6 +4,7 @@
 #include <QtCore/QObject>
 #include <QtCore/QList>
 #include "gamestate.h"
+#include "global.h"
 
 QT_FORWARD_DECLARE_CLASS(QWebSocketServer)
 QT_FORWARD_DECLARE_CLASS(QWebSocket)
@@ -13,6 +14,10 @@ class Server : public QObject
 {
     Q_OBJECT
 public:
+    // use mutex for both
+    int playersReady=0;
+    int playersConnected=0;
+
     explicit Server(quint16 port, QObject *parent = nullptr);
     virtual ~Server();
     GameState *gameState;

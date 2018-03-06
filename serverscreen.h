@@ -6,6 +6,7 @@
 #include <QGraphicsScene>
 
 #include "server.h"
+#include "global.h"
 
 class serverScreen{
 public:

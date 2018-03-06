@@ -14,7 +14,7 @@
 
 Game::Game(QWidget *parent){
     qDebug()<<"setting up client...";
-    Client *client = new Client(QUrl("ws://192.168.1.5:3000"));
+    Client *client = new Client(QUrl("ws://192.168.43.176:3000"));
     InputHandler *inputHandler = new InputHandler(client,NULL);
     // create the scene
     scene = new QGraphicsScene();
