@@ -1,7 +1,6 @@
 #include <QApplication>
 #include "game.h"
 #include "server.h"
-#include "mainwindow.h"
 #include "dialog.h"
 
 
