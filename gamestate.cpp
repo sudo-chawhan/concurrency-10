@@ -31,7 +31,7 @@ void GameState::updatePlayer(int id, QPoint new_pos)
 }
 
 // function for creating bullet at server
-void GameState::createBullet(bool team1, qreal x,qreal y)
+bullet* GameState::createBullet(bool team1, qreal x,qreal y)
 {
     bullet *new_bullet = new bullet(bullet_count,team1);
     new_bullet->setPos(x,y);
@@ -39,6 +39,7 @@ void GameState::createBullet(bool team1, qreal x,qreal y)
     bullets.push_back(new_bullet);
     bullet_count++;
     // mutex signal(bullet_count)
+    return new_bullet;
 }
 
 QJsonDocument GameState::getJsonDocFromGameState(){

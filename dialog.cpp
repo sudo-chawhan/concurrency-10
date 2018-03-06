@@ -2,10 +2,11 @@
 #include <QGridLayout>
 #include <QtGui>
 #include "dialog.h"
-#include "server.h"
+#include "serverscreen.h"
 #include "game.h"
 
 Server *server;
+serverScreen *ss;
 Game * game;
 bool isServer;
 
@@ -37,7 +38,9 @@ dialog::dialog(QWidget *parent)
  void dialog::make_server()
  {
      isServer = true;
-    server = new Server(3000);
+     server = new Server(3000);
+     ss = new serverScreen();
+
  }
 
  void dialog::make_client()

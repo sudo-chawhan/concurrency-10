@@ -3,7 +3,6 @@
 #include <QGraphicsPixmapItem>
 #include <QObject>
 #include <QGraphicsItem>
-#include<QGraphicsRectItem>
 
 class player:public QObject, public QGraphicsPixmapItem{
     Q_OBJECT

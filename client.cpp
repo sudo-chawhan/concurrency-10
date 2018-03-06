@@ -77,8 +77,8 @@ void Client::onTextMessageReceived(QString message){
 void Client::onBinaryMessageReceived(QByteArray bytes)
 {
     QJsonDocument doc = QJsonDocument::fromJson(bytes);
-    qDebug()<<"from server...";
-    qDebug()<<doc.toJson();
+    //qDebug()<<"from server...";
+    //qDebug()<<doc.toJson();
     QJsonObject item=doc.object();
     QJsonArray bulletArray = item["bullets"].toArray();
     QJsonArray playerArray = item["players"].toArray();
@@ -94,15 +94,8 @@ void Client::onBinaryMessageReceived(QByteArray bytes)
 //***            // delete bullet
             qDebug()<<"*******bullet deleted id:"<<((q)->id);
             game->scene->removeItem(q);
-            qDebug()<<"123";
-//            std::vector<bullet*> ::iterator it=find((gameState->bullets).begin(),(game->gamestate->bullets).end(),q);
-            qDebug()<<"1234";
-//            auto pos_in_vec = std::distance((gameState->bullets).begin(), it);
-            qDebug()<<"12344";
             (gameState->bullets).erase((gameState->bullets).begin()+i);
-            qDebug()<<"123444";
             delete (q);
-            qDebug()<<"1234444";
         }
 
     }
@@ -155,9 +148,13 @@ void Client::onBinaryMessageReceived(QByteArray bytes)
                    player *new_player;
                    //adding new player
                    if(team_a==true)
-                       new_player = new player_teama(player_id, team_a);
+                   {
+                       new_player = new player(player_id, team_a);
+                        if(typeid(new_player)==typeid(player_teama))
+                            qDebug()<<"im of type player teama";
+                   }
                    else
-                       new_player = new player_teamb(player_id, team_a);
+                       new_player = new player(player_id, team_a);
 
                    new_player->setPos(obj["posX"].toDouble(),obj["posY"].toDouble());
                    gameState->addPlayer(new_player);
@@ -165,6 +162,6 @@ void Client::onBinaryMessageReceived(QByteArray bytes)
                    game->scene->addItem(new_player);
                }
             }
-    qDebug()<<"client gamestate after server init json...";
-    qDebug()<<gameState->getJsonDocFromGameState().toJson();
+    //qDebug()<<"client gamestate after server init json...";
+    //qDebug()<<gameState->getJsonDocFromGameState().toJson();
 }

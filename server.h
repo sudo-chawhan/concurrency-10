@@ -19,6 +19,7 @@ public:
     void startGameLoop();
 
 private slots:
+    void sendGameStateToClients();
     void onNewConnection();
     void onTextMessageFromClient(const QString &message);
     void onBinaryMessageFromClient(QByteArray message);

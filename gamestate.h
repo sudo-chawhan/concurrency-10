@@ -19,7 +19,7 @@ public:
     void addBullet(bullet * new_bullet);
     void addPlayer(player * new_player);
     void updatePlayer(int id, QPoint new_pos);
-    void createBullet(bool team1, qreal x, qreal y);
+    bullet* createBullet(bool team1, qreal x, qreal y);
     QJsonDocument getJsonDocFromGameState();
 };
 

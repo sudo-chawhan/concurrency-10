@@ -24,7 +24,8 @@ SOURCES += main.cpp \
     player_teama.cpp \
     player_teamb.cpp \
     mainwindow.cpp \
-    dialog.cpp
+    dialog.cpp \
+    serverscreen.cpp
 
 HEADERS  += \
     game.h \
@@ -37,7 +38,8 @@ HEADERS  += \
     player_teama.h \
     player_teamb.h \
     mainwindow.h \
-    dialog.h
+    dialog.h \
+    serverscreen.h
 
 FORMS    +=
 
