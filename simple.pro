@@ -41,7 +41,8 @@ HEADERS  += \
     mainwindow.h \
     dialog.h \
     serverscreen.h \
-    wall.h
+    wall.h \
+    global.h
 
 FORMS    +=
 
