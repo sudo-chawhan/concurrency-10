@@ -21,7 +21,6 @@ SOURCES += main.cpp \
     inputhandler.cpp \
     server.cpp \
     client.cpp \
-    mainwindow.cpp \
     dialog.cpp \
     threadpool.cpp \
     serverscreen.cpp \
@@ -37,7 +36,6 @@ HEADERS  += \
     inputhandler.h \
     server.h \
     client.h \
-    mainwindow.h \
     dialog.h \
     threadpool.h\
     serverscreen.h \

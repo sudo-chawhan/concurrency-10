@@ -72,24 +72,6 @@ void Server::sendGameStateToClients(){
 void Server::onNewConnection()
 {
     qDebug()<<"new connection with client...";
-    // id to send to client
-    int id;
-    // make new player
-    player *new_player;
-    if(gameState->players.size()==0){
-        id=0;
-        new_player = new player(id,true);
-        new_player->setPos(start_a); // TODO generalize to always be in the middle bottom of screen
-    }
-   else{
-        id=1;
-        new_player = new player(id,false);
-        new_player->setPos(start_b); // TODO generalize to always be in the middle bottom of screen
-    }// make the player focusable and set it to be the current focus
-
-    scene->addItem(new_player);
-
-    gameState->players.push_back(new_player);
 
     auto pSocket = m_pWebSocketServer->nextPendingConnection();
     QTextStream(stdout) << getIdentifier(pSocket) << " connected!\n";
@@ -104,19 +86,38 @@ void Server::onNewConnection()
     connect(pSocket, &QWebSocket::disconnected,
             this, &Server::socketDisconnected);
 
-    std::string init_messsage="init:";
-    init_messsage+=std::to_string(id);
-    pSocket->sendTextMessage(QString::fromStdString(init_messsage));
-    qDebug()<<"init message sent to client #"<<id;
-
     m_clients << pSocket;
+
+//********can use mutex for new connection sending id
+
+    // make new player
+    player *new_player;
+    if(gameState->players.size()%2==0){
+        new_player = new player(playersConnected,true);
+        new_player->setPos(start_a); // TODO generalize to always be in the middle bottom of screen
+    }
+   else{
+        new_player = new player(playersConnected,false);
+        new_player->setPos(start_b); // TODO generalize to always be in the middle bottom of screen
+    }// make the player focusable and set it to be the current focus
+
+    scene->addItem(new_player);
+    gameState->players.push_back(new_player);
+
+    std::string init_messsage="init:";
+    init_messsage+=std::to_string(playersConnected);
+    pSocket->sendTextMessage(QString::fromStdString(init_messsage));
+    qDebug()<<"init message sent to client #"<<playersConnected;
+
+    playersConnected++;
+
+//**************mutex signal
+
 
     // if all clients are done start game loop
     // ...
-    if(id==1){
-        startGameLoop();
-    }
 
+//************** signal mutex
 
 }
 
@@ -157,8 +158,17 @@ void Server::onBinaryMessageFromClient(QByteArray message){
 
 void Server::onTextMessageFromClient(const QString &message)
 {
-    qDebug()<<"from client: "<<message;
-
+    qDebug()<<"message recieved for ready";
+    if(message.startsWith("ready:")){
+        //qDebug()<<"init message recieved: "<<message;
+        QString m_id = message.mid(6,message.size()-6);
+///***********mutex wait
+        playersReady++;
+///***********mutex signal
+        if(playersReady==playersConnected){
+              startGameLoop();
+        }
+    }
 }
 
 void Server::socketDisconnected()
