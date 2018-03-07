@@ -13,12 +13,18 @@
 #include "wall.h"
 
 Game::Game(QWidget *parent){
-    qDebug()<<"setting up client...";
-    Client *client = new Client(QUrl("ws://192.168.43.176:3000"));
-    InputHandler *inputHandler = new InputHandler(client,NULL);
+    //qDebug()<<"setting up client...";
+
     // create the scene
     scene = new QGraphicsScene();
+
+
     scene->setSceneRect(0,0,1280,850); // make the scene 800x600 instead of infinity by infinity (default)
+
+    qDebug()<<"reached here";
+    Client *client = new Client(QUrl("ws://192.168.43.176:3000"));
+    qDebug()<<"crossed";
+    InputHandler *inputHandler = new InputHandler(client,NULL);
     inputHandler->setBackgroundBrush(QBrush(QImage(":/images/ye.png")));
 
     // madhur
@@ -46,31 +52,46 @@ Game::Game(QWidget *parent){
     wall4->setPos(0,800);
 
     //for horizontal bars
-        QGraphicsRectItem *o1 = new QGraphicsRectItem();
-        QGraphicsRectItem *o2 = new QGraphicsRectItem();
+    QGraphicsRectItem *v1 = new QGraphicsRectItem();
+        QGraphicsRectItem *v2 = new QGraphicsRectItem();
+        scene->addItem(v1);
+        scene->addItem(v2);
+        v1->setRect(400,50,25,250);
+        v2->setRect(1280-400-25,850-50-250,25,250);
 
-        scene->addItem(o1);
-        scene->addItem(o2);
+        QGraphicsRectItem *v3 = new QGraphicsRectItem();
+        QGraphicsRectItem *v4 = new QGraphicsRectItem();
+        scene->addItem(v3);
+        scene->addItem(v4);
+        v3->setRect(475,50+400,25,250);
+        v4->setRect(1280-475-25,850-50-250-400,25,250);
 
-        o1->setRect(0,0,500,50);
-        o2->setRect(0,0,500,50);
+        QGraphicsRectItem *v5 = new QGraphicsRectItem();
+        scene->addItem(v5);
+        v5->setRect(1280/2-12,850/2-250,25,500);
 
-        o1->setPos(260,260);
-        o2->setPos(1280-260-500,540);
+        QGraphicsRectItem *v6 = new QGraphicsRectItem();
+        QGraphicsRectItem *v7 = new QGraphicsRectItem();
+        scene->addItem(v6);
+        scene->addItem(v7);
+        v6->setRect(1280-250-25,50,25,150);
+        v7->setRect(250,850-50-150,25,150);
 
-    //for vertical bars
-        QGraphicsRectItem *o3 = new QGraphicsRectItem();
-        QGraphicsRectItem *o4 = new QGraphicsRectItem();
+        //  Horizontal bars
 
-        scene->addItem(o3);
-        scene->addItem(o4);
+        QGraphicsRectItem *h1 = new QGraphicsRectItem();
+        QGraphicsRectItem *h2 = new QGraphicsRectItem();
+        scene->addItem(h1);
+        scene->addItem(h2);
+        h1->setRect(225-25,50+400,300,25);
+        h2->setRect(1280-225-300+25,850-400-50-25,300,25);
 
-        o3->setRect(0,0,50,400);
-        o4->setRect(0,0,50,400);
-
-
-        o3->setPos(260,260);
-        o4->setPos(970,540-350);
+        QGraphicsRectItem *h3 = new QGraphicsRectItem();
+        QGraphicsRectItem *h4 = new QGraphicsRectItem();
+        scene->addItem(h3);
+        scene->addItem(h4);
+        h3->setRect(50,275,150,25);
+        h4->setRect(1280-50-150,850-275-25,150,25);
     //
     // make the newly created scene the scene to visualize (since Game is a QGraphicsView Widget,
     // it can be used to visualize scenes)

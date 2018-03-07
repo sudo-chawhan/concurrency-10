@@ -4,7 +4,15 @@
 #include <QKeyEvent>
 #include <QDebug>
 #include "bullet.h"
+#include "server.h"
+#include "dialog.h"
+#include "flag.h"
 
+extern Server *server;
+extern bool isFlagATaken;
+extern bool isFlagBTaken;
+extern int takersIDA;
+extern int takersIDB;
 
 player::player(int id1, bool team1,QGraphicsItem *parent): QGraphicsPixmapItem(parent){
 
@@ -16,44 +24,88 @@ player::player(int id1, bool team1,QGraphicsItem *parent): QGraphicsPixmapItem(p
     else setPixmap(QPixmap(":/images/space_shipB.png"));
 }
 
-void player::moveLeft(){
+bool player::moveLeft(){
+    bool to_return=false;
     setPos(x()-10,y());
     QList<QGraphicsItem *> colliding_items = collidingItems();
     qDebug()<<colliding_items.size();
     for (int i = 0, n = colliding_items.size(); i < n; ++i){
-        if(typeid(*colliding_items[i])==typeid(QGraphicsRectItem))
+        if(typeid(*colliding_items[i])==typeid(QGraphicsRectItem)){
             if(team) setPos(start_a); else setPos(start_b);
+        }
+        if(typeid(*colliding_items[i])==typeid(Flag) && team!=dynamic_cast<Flag*>(colliding_items[i])->team){
+            isFlagATaken=true;
+            to_return=true;
+        }
     }
+
+    return to_return;
 }
 
-void player::moveRight(){
+bool player::moveRight(){
+    bool to_return=false;
+
     setPos(x()+10,y());
     QList<QGraphicsItem *> colliding_items = collidingItems();
     qDebug()<<colliding_items.size();
     for (int i = 0, n = colliding_items.size(); i < n; ++i){
         if(typeid(*colliding_items[i])==typeid(QGraphicsRectItem))
             if(team) setPos(start_a); else setPos(start_b);
+        if(typeid(*colliding_items[i])==typeid(Flag) && team!=dynamic_cast<Flag*>(colliding_items[i])->team)
+            to_return=true;
     }
+    return to_return;
+
 }
 
-void player::moveUp(){
+bool player::moveUp(){
+    bool to_return=false;
+
     setPos(x(),y()-10);
     QList<QGraphicsItem *> colliding_items = collidingItems();
     qDebug()<<colliding_items.size();
     for (int i = 0, n = colliding_items.size(); i < n; ++i){
         if(typeid(*colliding_items[i])==typeid(QGraphicsRectItem))
-            if(team) setPos(start_a); else setPos(start_b);
+            respawn();
+        if(typeid(*colliding_items[i])==typeid(Flag) && team!=dynamic_cast<Flag*>(colliding_items[i])->team)
+            to_return=true;
 
     }
+    return to_return;
+
 }
 
-void player::moveDown(){
+bool player::moveDown(){
+    bool to_return=false;
+
     setPos(x(),y()+10);
     QList<QGraphicsItem *> colliding_items = collidingItems();
     qDebug()<<colliding_items.size();
     for (int i = 0, n = colliding_items.size(); i < n; ++i){
         if(typeid(*colliding_items[i])==typeid(QGraphicsRectItem))
             if(team) setPos(start_a); else setPos(start_b);
+        if(typeid(*colliding_items[i])==typeid(Flag) && team!=dynamic_cast<Flag*>(colliding_items[i])->team)
+            to_return=true;
+    }
+    return to_return;
+
+}
+
+void player::respawn()
+{
+    if(team){
+        setPos(start_a);
+        if(takersIDB==id && isFlagBTaken){
+            server->onFlagDropped_B();
+            setPixmap(QPixmap(":images/space_shipA.png"));
+        }
+    }
+    else{
+        setPos(start_b);
+        if(takersIDA==id && isFlagATaken){
+            server->onFlagDropped_A();
+            setPixmap(QPixmap(":images/space_shipB.png"));
+        }
     }
 }
 

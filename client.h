@@ -7,10 +7,14 @@
 #include <QtWebSockets/QWebSocket>
 #include "gamestate.h"
 #include "global.h"
+#include "flag.h"
+
 class Client : public QObject
 {
     Q_OBJECT
 public:
+    Flag *flagA;
+    Flag *flagB;
     explicit Client(QUrl url_local, QObject *parent = nullptr);
     virtual ~Client();
     GameState *gameState;

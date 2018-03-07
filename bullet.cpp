@@ -56,12 +56,6 @@ bullet::bullet(enums::direc dirc,int id1,bool team1,QGraphicsItem *parent):QObje
 }
 
 void bullet::move(){
-    //qDebug()<<"iterate move";
-
-
-    //qDebug()<<"colliding items in client:";
-    //QList<QGraphicsItem *> colliding_items = collidingItems();
-    //qDebug()<<colliding_items.size();
 
 // // // // // // // // IF SERVER
 
@@ -79,23 +73,6 @@ void bullet::move(){
         }
 
        /// qDebug()<<"is server!";
-
-//        if(pos().y()<0 || pos().y()>screen_height){
-//            qDebug()<<"is out of bound";
-//            // delete this bullet from bullets vector
-
-
-//            // find the index of the bullet in bullets vector
-//            std::vector<bullet*> ::iterator it=find((server->gameState->bullets).begin(),(server->gameState->bullets).end(),this);
-//            auto pos_in_vec = std::distance((server->gameState->bullets).begin(), it);
-//            qDebug()<<"bullets size before: "<<(server->gameState->bullets).size();
-//            (server->gameState->bullets).erase((server->gameState->bullets).begin()+pos_in_vec);
-//            qDebug()<<"bullets size after: "<<(server->gameState->bullets).size();
-//            scene()->removeItem(this);
-//            delete this;
-
-//            return;
-//        }
 
         // get a list of all the items currently colliding with this bullet
         QList<QGraphicsItem *> colliding_items = collidingItems();
@@ -118,10 +95,10 @@ void bullet::move(){
                 // make colliding item dead
                 if(team==true){
                     // player is of team false
-                    dynamic_cast<player*>(colliding_items[i])->setPos(start_b);
+                    dynamic_cast<player*>(colliding_items[i])->respawn();
                 }else{
                     // player is of team true
-                    dynamic_cast<player*>(colliding_items[i])->setPos(start_a);
+                    dynamic_cast<player*>(colliding_items[i])->respawn();
                 }
                 delete this;
 

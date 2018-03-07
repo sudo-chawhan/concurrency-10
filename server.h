@@ -5,6 +5,7 @@
 #include <QtCore/QList>
 #include "gamestate.h"
 #include "global.h"
+#include "flag.h"
 
 QT_FORWARD_DECLARE_CLASS(QWebSocketServer)
 QT_FORWARD_DECLARE_CLASS(QWebSocket)
@@ -17,10 +18,14 @@ public:
     // use mutex for both
     int playersReady=0;
     int playersConnected=0;
+    Flag *flagA;
+    Flag *flagB;
     explicit Server(quint16 port, QObject *parent = nullptr);
     virtual ~Server();
     GameState *gameState;
     void startGameLoop();
+    void onFlagDropped_A();
+    void onFlagDropped_B();
 
 private slots:
     void sendGameStateToClients();

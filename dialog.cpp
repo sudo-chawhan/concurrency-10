@@ -8,7 +8,6 @@
 
 Server *server;
 serverScreen *ss;
-Game * game;
 bool isServer;
 
 dialog::dialog(QWidget *parent)

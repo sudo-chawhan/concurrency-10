@@ -1,6 +1,8 @@
 #include "clientwindow.h"
 #include "ui_clientwindow.h"
 
+Game * game;
+
 clientwindow::clientwindow(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::clientwindow)

@@ -18,6 +18,11 @@ extern QGraphicsScene *scene;
 
 QT_USE_NAMESPACE
 
+bool isFlagATaken=false;
+bool isFlagBTaken=false;
+int takersIDA;
+int takersIDB;
+
 static QString getIdentifier(QWebSocket *peer)
 {
     return QStringLiteral("%1:%2").arg(peer->peerAddress().toString(),
@@ -31,6 +36,9 @@ Server::Server(quint16 port, QObject *parent) :
                                             this))
 {
     gameState = new GameState();
+    flagA=new Flag(true);
+    flagB=new Flag(false);
+
 
     if (m_pWebSocketServer->listen(QHostAddress("0.0.0.0"), port))
     {
@@ -54,6 +62,38 @@ void Server::startGameLoop(){
 
     // start the timer
     timer->start(50);
+}
+
+void Server::onFlagDropped_A()
+{
+    // drop flagA make flag visible and send all clients text that flag is dropped and make flag visible
+    std::string drop_message;
+    isFlagATaken=false;
+    drop_message="dropA:";
+    scene->addItem(flagA);
+
+    drop_message +=std::to_string(takersIDA);
+    for (QList<QWebSocket*>::iterator i = m_clients.begin(); i != m_clients.end(); i++)
+    {
+          (*i)->sendTextMessage(QString::fromStdString(drop_message));
+    }
+
+}
+
+void Server::onFlagDropped_B()
+{
+    // drop flagA make flag visible and send all clients text that flag is dropped and make flag visible
+    std::string drop_message;
+    isFlagBTaken=false;
+    drop_message="dropB:";
+    scene->addItem(flagB);
+
+    drop_message+=std::to_string(takersIDB);
+    for (QList<QWebSocket*>::iterator i = m_clients.begin(); i != m_clients.end(); i++)
+    {
+          (*i)->sendTextMessage(QString::fromStdString(drop_message));
+    }
+
 }
 
 void Server::sendGameStateToClients(){
@@ -102,6 +142,8 @@ void Server::onNewConnection()
     }// make the player focusable and set it to be the current focus
 
     scene->addItem(new_player);
+    scene->addItem(flagA);
+    scene->addItem(flagB);
     gameState->players.push_back(new_player);
 
     std::string init_messsage="init:";
@@ -126,19 +168,114 @@ void Server::onBinaryMessageFromClient(QByteArray message){
     QJsonDocument item_doc = QJsonDocument::fromJson(message);
     QJsonObject item_object = item_doc.object();
     int id = item_object["id"].toInt();
+
     QString key = item_object["key"].toString();
 
     if(key=="LEFT"){
-        gameState->players.at(id)->moveLeft();
+        ///use mutex for flag
+        ///below: returns whether flag taken or not
+        bool flagTaken=gameState->players.at(id)->moveLeft();
+        if(flagTaken==true){
+            gameState->players.at(id)->setPixmap(QPixmap(":images/player.png"));
+            std::string take_messsage;
+            if(gameState->players.at(id)->team) {
+                takersIDB=id;
+                isFlagBTaken=true;
+                take_messsage="takerB:";
+                scene->removeItem(flagB);
+            }
+            else{
+                isFlagATaken=true;
+                takersIDA=id;
+                take_messsage="takerA:";
+                scene->removeItem(flagA);
+            }
+
+            take_messsage+=std::to_string(id);
+            for (QList<QWebSocket*>::iterator i = m_clients.begin(); i != m_clients.end(); i++)
+            {
+                  (*i)->sendTextMessage(QString::fromStdString(take_messsage));
+            }
+
+        }
     }
     if(key=="RIGHT"){
-        gameState->players.at(id)->moveRight();
+        bool flagTaken = gameState->players.at(id)->moveRight();
+        if(flagTaken==true){
+            gameState->players.at(id)->setPixmap(QPixmap(":images/player.png"));
+            std::string take_messsage;
+            if(gameState->players.at(id)->team) {
+                takersIDB=id;
+                isFlagBTaken=true;
+                take_messsage="takerB:";
+                scene->removeItem(flagB);
+            }
+            else{
+                isFlagATaken=true;
+                takersIDA=id;
+                take_messsage="takerA:";
+                scene->removeItem(flagA);
+            }
+
+            take_messsage+=std::to_string(id);
+            for (QList<QWebSocket*>::iterator i = m_clients.begin(); i != m_clients.end(); i++)
+            {
+                  (*i)->sendTextMessage(QString::fromStdString(take_messsage));
+            }
+
+        }
     }
     if(key=="UP"){
-        gameState->players.at(id)->moveUp();
+        bool flagTaken = gameState->players.at(id)->moveUp();
+        if(flagTaken==true){
+            gameState->players.at(id)->setPixmap(QPixmap(":images/player.png"));
+            std::string take_messsage;
+            if(gameState->players.at(id)->team) {
+                takersIDB=id;
+                isFlagBTaken=true;
+                take_messsage="takerB:";
+                scene->removeItem(flagB);
+            }
+            else{
+                isFlagATaken=true;
+                takersIDA=id;
+                take_messsage="takerA:";
+                scene->removeItem(flagA);
+            }
+
+            take_messsage+=std::to_string(id);
+            for (QList<QWebSocket*>::iterator i = m_clients.begin(); i != m_clients.end(); i++)
+            {
+                  (*i)->sendTextMessage(QString::fromStdString(take_messsage));
+            }
+
+        }
     }
     if(key=="DOWN"){
-        gameState->players.at(id)->moveDown();
+        bool flagTaken = gameState->players.at(id)->moveDown();
+        if(flagTaken==true){
+            gameState->players.at(id)->setPixmap(QPixmap(":images/player.png"));
+            std::string take_messsage;
+            if(gameState->players.at(id)->team) {
+                takersIDB=id;
+                isFlagBTaken=true;
+                take_messsage="takerB:";
+                scene->removeItem(flagB);
+            }
+            else{
+                isFlagATaken=true;
+                takersIDA=id;
+                take_messsage="takerA:";
+                scene->removeItem(flagA);
+            }
+
+            take_messsage+=std::to_string(id);
+            for (QList<QWebSocket*>::iterator i = m_clients.begin(); i != m_clients.end(); i++)
+            {
+                  (*i)->sendTextMessage(QString::fromStdString(take_messsage));
+            }
+
+        }
     }
     if(key=="W"||key=="A"||key=="S"||key=="D"){
         bullet *new_bullet = gameState->createBullet(key,gameState->players.at(id)->team,gameState->players.at(id)->pos().x()+25,gameState->players.at(id)->pos().y()+25);

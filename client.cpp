@@ -13,7 +13,12 @@
 extern Game *game;
 
 Client::Client(QUrl url_local,QObject *parent){
+    qDebug()<<"flags";
+    flagA=new Flag(true);
+    flagB=new Flag(false);
+    qDebug()<<"flags crossed";
 
+    qDebug()<<"scenes crossed";
     gameState = new GameState();
 
     if(&m_client_socket==NULL){
@@ -76,11 +81,42 @@ void Client::onTextMessageReceived(QString message){
         QString m_id = message.mid(5,message.size()-5);
         main_id=m_id.toInt();
 
+        game->scene->addItem(flagA);
+        game->scene->addItem(flagB);
+
     ///// send ready to server
         std::string init_messsage="ready:";
         init_messsage+=std::to_string(main_id);
         m_client_socket.sendTextMessage(QString::fromStdString(init_messsage));
 
+    }
+
+    if(message.startsWith("takerA:")){
+        qDebug()<<"flagA taken message recieved: "<<message;
+        int m_id = message.mid(7,message.size()-7).toInt();
+        gameState->players.at(m_id)->setPixmap(QPixmap(":images/player.png"));
+        game->scene->removeItem(flagA);
+    }
+
+    if(message.startsWith("takerB:")){
+        qDebug()<<"flagB taken message recieved: "<<message;
+        int m_id = message.mid(7,message.size()-7).toInt();
+        gameState->players.at(m_id)->setPixmap(QPixmap(":images/player.png"));
+        game->scene->removeItem(flagB);
+    }
+
+    if(message.startsWith("dropA:")){
+        qDebug()<<"flagA dropped message recieved: "<<message;
+        int m_id = message.mid(6,message.size()-6).toInt();
+        gameState->players.at(m_id)->setPixmap(QPixmap(":images/space_shipB.png"));
+        game->scene->addItem(flagA);
+    }
+
+    if(message.startsWith("dropB:")){
+        qDebug()<<"flagB dropped message recieved: "<<message;
+        int m_id = message.mid(6,message.size()-6).toInt();
+        gameState->players.at(m_id)->setPixmap(QPixmap(":images/space_shipA.png"));
+        game->scene->addItem(flagB);
     }
 
 
@@ -99,7 +135,7 @@ void Client::onBinaryMessageReceived(QByteArray bytes)
 //%%%%%%%%%% ERROR
     for(int i=0;i<gameState->bullets.size();i++)
     {
-        auto q = gameState->bullets.at(i);
+        bullet* q = gameState->bullets.at(i);
         // if bullet does not exist then delete it
         int index=checkBullet(bulletArray,(q)->id);
         if(index==-1)

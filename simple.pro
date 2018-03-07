@@ -28,7 +28,8 @@ SOURCES += main.cpp \
     hostdialog.cpp \
     clientwindow.cpp \
     gamewindow.cpp \
-    global.cpp
+    global.cpp \
+    flag.cpp
 
 
 HEADERS  += \
@@ -47,7 +48,8 @@ HEADERS  += \
     hostdialog.h \
     clientwindow.h \
     gamewindow.h  \
-    enums.h
+    enums.h \
+    flag.h
 
 
 FORMS    += \
