@@ -23,6 +23,7 @@ bool isFlagBTaken=false;
 int takersIDA;
 int takersIDB;
 
+
 static QString getIdentifier(QWebSocket *peer)
 {
     return QStringLiteral("%1:%2").arg(peer->peerAddress().toString(),
@@ -57,6 +58,12 @@ Server::~Server()
 }
 
 void Server::startGameLoop(){
+
+    for (QList<QWebSocket*>::iterator i = m_clients.begin(); i != m_clients.end(); i++)
+    {
+          (*i)->sendTextMessage(QString::fromStdString("start"));
+    }
+
     QTimer * timer = new QTimer(this);
     connect(timer,SIGNAL(timeout()),this,SLOT(sendGameStateToClients()));
 
@@ -130,21 +137,6 @@ void Server::onNewConnection()
 
 //********can use mutex for new connection sending id
 
-    // make new player
-    player *new_player;
-    if(gameState->players.size()%2==0){
-        new_player = new player(playersConnected,true);
-        new_player->setPos(start_a); // TODO generalize to always be in the middle bottom of screen
-    }
-   else{
-        new_player = new player(playersConnected,false);
-        new_player->setPos(start_b); // TODO generalize to always be in the middle bottom of screen
-    }// make the player focusable and set it to be the current focus
-
-    scene->addItem(new_player);
-    scene->addItem(flagA);
-    scene->addItem(flagB);
-    gameState->players.push_back(new_player);
 
     std::string init_messsage="init:";
     init_messsage+=std::to_string(playersConnected);
@@ -154,12 +146,8 @@ void Server::onNewConnection()
     playersConnected++;
 
 //**************mutex signal
-
-
-    // if all clients are done start game loop
-    // ...
-
-//************** signal mutex
+    scene->addItem(flagA);
+    scene->addItem(flagB);
 
 }
 
@@ -296,16 +284,33 @@ void Server::onBinaryMessageFromClient(QByteArray message){
 void Server::onTextMessageFromClient(const QString &message)
 {
     qDebug()<<"message recieved for ready";
-    if(message.startsWith("ready:")){
+
         //qDebug()<<"init message recieved: "<<message;
+
+        // make new player for client in server
+        player *new_player;
+        if(message.startsWith("readyA:")){
+            int m_id = message.mid(7,message.size()-7).toInt();
+            new_player = new player(m_id,true);
+            new_player->setPos(start_a); // TODO generalize to always be in the middle bottom of screen
+        }
+       if(message.startsWith("readyB:")){
+           int m_id = message.mid(7,message.size()-7).toInt();
+            new_player = new player(m_id,false);
+            new_player->setPos(start_b); // TODO generalize to always be in the middle bottom of screen
+        }// make the player focusable and set it to be the current focus
+
+        scene->addItem(new_player);
+
+        gameState->players.push_back(new_player);
+
+
         QString m_id = message.mid(6,message.size()-6);
 ///***********mutex wait
         playersReady++;
 ///***********mutex signal
-        if(playersReady==playersConnected){
-              startGameLoop();
-        }
-    }
+
+
 }
 
 void Server::socketDisconnected()

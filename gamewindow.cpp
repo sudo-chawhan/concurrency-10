@@ -1,10 +1,13 @@
 #include "gamewindow.h"
 #include "ui_gamewindow.h"
+#include "game.h"
+#include "client.h"
 
-gamewindow::gamewindow(QWidget *parent) :
+gamewindow::gamewindow(Client *client,QWidget *parent) :
     QDialog(parent),
     ui(new Ui::gamewindow)
 {
+    window_client = client;
     ui->setupUi(this);
 }
 
@@ -16,17 +19,19 @@ gamewindow::~gamewindow()
 
 void gamewindow::on_radioButton_toggled(bool checked)
 {
-    team=true;
+    window_client->team=true;
     qDebug()<<"team a selected";
 }
 
 void gamewindow::on_radioButton_2_toggled(bool checked)
 {
-    team=false;
+    window_client->team=false;
     qDebug()<<"team b selected";
 }
 
 void gamewindow::on_pushButton_clicked()
 {
     //function for ready
+    qDebug()<<"ready messsage sent to client";
+    window_client->onReady();
 }

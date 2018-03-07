@@ -15,6 +15,7 @@ class Client : public QObject
 public:
     Flag *flagA;
     Flag *flagB;
+    bool team;
     explicit Client(QUrl url_local, QObject *parent = nullptr);
     virtual ~Client();
     GameState *gameState;
@@ -22,7 +23,8 @@ public:
     void sendBinaryMessageToServer(QByteArray message);
     int checkBullet(QJsonArray bulletArray,int id);
     int main_id;
-
+    void onReady();
+    void onStart();
 private slots:
     void onConnected();
     void closed();

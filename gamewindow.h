@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include <QDebug>
+#include "client.h"
 
 namespace Ui {
 class gamewindow;

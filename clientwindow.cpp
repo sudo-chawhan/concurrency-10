@@ -1,7 +1,6 @@
 #include "clientwindow.h"
 #include "ui_clientwindow.h"
 
-Game * game;
 
 clientwindow::clientwindow(QWidget *parent) :
     QDialog(parent),
@@ -22,18 +21,14 @@ void clientwindow::on_pushButton_clicked()
 {
     ip=ui->lineEdit->text();
     //compare the ip with the given input
-    if(1)
-    {
         QString url_string = "ws://"+ip+":3000";
+        qDebug()<<"client's request url"<<url_string;
         Client *client = new Client(QUrl(url_string));
-        game_selection=new gamewindow();
+        qDebug()<<"created client!";
+        game_selection=new gamewindow(client);
         game_selection->show();
         this->deleteLater();
-    }
-    else
-    {
-        qDebug()<<"ENTER THE CORRECT IP ADDRESSS";
-    }
+
     //game =new Game();
 
 }
