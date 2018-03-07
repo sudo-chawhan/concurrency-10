@@ -29,7 +29,8 @@ SOURCES += main.cpp \
     clientwindow.cpp \
     gamewindow.cpp \
     global.cpp \
-    flag.cpp
+    flag.cpp \
+    score.cpp
 
 
 HEADERS  += \
@@ -49,7 +50,8 @@ HEADERS  += \
     clientwindow.h \
     gamewindow.h  \
     enums.h \
-    flag.h
+    flag.h \
+    score.h
 
 
 FORMS    += \

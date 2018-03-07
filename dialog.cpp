@@ -39,7 +39,7 @@ dialog::dialog(QWidget *parent)
  {
      isServer = true;
      server = new Server(3000);
-     hostdialog * host_sc=new hostdialog("hihi");
+     hostdialog * host_sc=new hostdialog("");
      host_sc->show();
      this->hide();
  }
