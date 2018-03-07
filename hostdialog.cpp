@@ -8,7 +8,7 @@ hostdialog::hostdialog(QString s,QWidget *parent) :
 {
     ui->setupUi(this);
     this->setWindowTitle("HOST WINDOW");
-    ui->label->setText("ENTER THE IP IN JOIN MENU :"+s);
+    ui->label->setText("Press ok to start!"+s);
 }
 
 hostdialog::~hostdialog()

@@ -24,6 +24,8 @@ void clientwindow::on_pushButton_clicked()
     //compare the ip with the given input
     if(1)
     {
+        QString url_string = "ws://"+ip+":3000";
+        Client *client = new Client(QUrl(url_string));
         game_selection=new gamewindow();
         game_selection->show();
         this->deleteLater();

@@ -13,9 +13,10 @@ class gamewindow : public QDialog
     Q_OBJECT
 
 public:
-    explicit gamewindow(QWidget *parent = 0);
+    explicit gamewindow(Client *client,QWidget *parent = 0);
     ~gamewindow();
     bool team;
+    Client *window_client;
 
 private slots:
 

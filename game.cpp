@@ -12,7 +12,7 @@
 #include "client.h"
 #include "wall.h"
 
-Game::Game(QWidget *parent){
+Game::Game(Client * client,QWidget *parent){
     //qDebug()<<"setting up client...";
 
     // create the scene
@@ -22,7 +22,7 @@ Game::Game(QWidget *parent){
     scene->setSceneRect(0,0,1280,850); // make the scene 800x600 instead of infinity by infinity (default)
 
     qDebug()<<"reached here";
-    Client *client = new Client(QUrl("ws://192.168.43.176:3000"));
+
     qDebug()<<"crossed";
     InputHandler *inputHandler = new InputHandler(client,NULL);
     inputHandler->setBackgroundBrush(QBrush(QImage(":/images/ye.png")));
