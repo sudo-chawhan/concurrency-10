@@ -6,9 +6,9 @@ Flag::Flag(bool team1, QGraphicsItem *parent):QObject(),QGraphicsPixmapItem(pare
 {
     team=team1;
     if(team)
-        setPos(start_a);
+        setPos(flagPosA);
     else
-        setPos(start_b);
+        setPos(flagPosB);
 
     setPixmap(QPixmap(":/images/bullet.png"));
 }

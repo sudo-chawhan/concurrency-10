@@ -8,8 +8,6 @@
 #include <QTimer>
 
 #include "player.h"
-#include "player_teama.h"
-#include "player_teamb.h"
 
 #include <cstdio>
 using namespace std;
@@ -137,7 +135,7 @@ void Server::onNewConnection()
 
     m_clients << pSocket;
 
-//********can use mutex for new connection sending id
+///********can use mutex for new connection sending id
 
 
     std::string init_messsage="init:";
@@ -145,9 +143,14 @@ void Server::onNewConnection()
     pSocket->sendTextMessage(QString::fromStdString(init_messsage));
     qDebug()<<"init message sent to client #"<<playersConnected;
 
+    player *new_player = new player(playersConnected,true); // dummy entry
+
+    scene->addItem(new_player);
+    gameState->players.push_back(new_player);
+
     playersConnected++;
 
-//**************mutex signal
+///**************mutex signal
     scene->addItem(flagA);
     scene->addItem(flagB);
 
@@ -290,24 +293,20 @@ void Server::onTextMessageFromClient(const QString &message)
         //qDebug()<<"init message recieved: "<<message;
 
         // make new player for client in server
-        player *new_player;
         if(message.startsWith("readyA:")){
             int m_id = message.mid(7,message.size()-7).toInt();
-            new_player = new player(m_id,true);
-            new_player->setPos(start_a); // TODO generalize to always be in the middle bottom of screen
+            gameState->players.at(m_id)->team=true;
+            gameState->players.at(m_id)->setPixmap(QPixmap(":/images/space_shipA.png"));
+            gameState->players.at(m_id)->setPos(start_a);
         }
        if(message.startsWith("readyB:")){
            int m_id = message.mid(7,message.size()-7).toInt();
-            new_player = new player(m_id,false);
-            new_player->setPos(start_b); // TODO generalize to always be in the middle bottom of screen
+           gameState->players.at(m_id)->team=false;
+           gameState->players.at(m_id)->setPixmap(QPixmap(":/images/space_shipB.png"));
+           gameState->players.at(m_id)->setPos(start_b);
+
         }// make the player focusable and set it to be the current focus
 
-        scene->addItem(new_player);
-
-        gameState->players.push_back(new_player);
-
-
-        QString m_id = message.mid(6,message.size()-6);
 ///***********mutex wait
         playersReady++;
 ///***********mutex signal

@@ -52,6 +52,8 @@ bullet* GameState::createBullet(QString dir,bool team1, qreal x,qreal y)
 QJsonDocument GameState::getJsonDocFromGameState(){
 
     QJsonObject gamestate1;
+    gamestate1.insert("scoreA",score[0]);
+    gamestate1.insert("scoreB",score[1]);
         QJsonArray bulletArray;
 
             for(auto it = bullets.begin() ; it != bullets.end() ; it++)
