@@ -62,7 +62,6 @@ void Client::onReady(){
 
     ready_message+=std::to_string(main_id);
     m_client_socket.sendTextMessage(QString::fromStdString(ready_message));
-    //qDebug()<<"init message sent to client #"<<playersConnected;
 }
 
 void Client::sendTextMessageToServer(QString message)
@@ -153,7 +152,6 @@ void Client::onBinaryMessageReceived(QByteArray bytes)
     QJsonArray playerArray = item["players"].toArray();
 
     // check if to delete a bullet, can be done in ****** parallel******
-//%%%%%%%%%% ERROR
     for(int i=0;i<gameState->bullets.size();i++)
     {
         bullet* q = gameState->bullets.at(i);

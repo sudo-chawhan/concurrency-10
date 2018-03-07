@@ -57,7 +57,7 @@ bullet::bullet(enums::direc dirc,int id1,bool team1,QGraphicsItem *parent):QObje
 
 void bullet::move(){
 
-// // // // // // // // IF SERVER
+// // // // // // // // ONLY IF SERVER
 
     if(is_server){
 
@@ -77,11 +77,11 @@ void bullet::move(){
         // get a list of all the items currently colliding with this bullet
         QList<QGraphicsItem *> colliding_items = collidingItems();
         qDebug()<<colliding_items.size();
-//        // if one of the colliding items is an Enemy, destroy both the bullet and the enemy
+        // if one of the colliding items is an Enemy, destroy both the bullet and the enemy
         for (int i = 0, n = colliding_items.size(); i < n; ++i){
             qDebug()<<"entered colliding items";
 
-//            // collided with an enemy team
+               // collided with an enemy team
             if ((typeid(*(colliding_items[i])) == typeid(player) && team!=dynamic_cast<player*>(colliding_items[i])->team)/*||(typeid(*(colliding_items[i])) == typeid(player) && team==false)*/){
 
                 // delete this bullet from bullets vector
