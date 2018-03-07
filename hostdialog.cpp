@@ -2,8 +2,10 @@
 #include "ui_hostdialog.h"
 #include <string>
 #include "server.h"
+#include "serverscreen.h"
 
 extern Server *server;
+extern serverScreen *ss;
 
 hostdialog::hostdialog(QString s,QWidget *parent) :
     QDialog(parent),
@@ -24,6 +26,6 @@ void hostdialog::on_pushButton_clicked()
     if(server->playersConnected==server->playersReady){
         this->close();
         server->startGameLoop();
-        ss =new serverScreen();
+        ss->view->show();
     }
 }
