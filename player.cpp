@@ -16,6 +16,7 @@ player::player(int id1, bool team1,QGraphicsItem *parent): QGraphicsPixmapItem(p
     if(team) setPixmap(QPixmap(":/images/space_shipA.png"));
     else setPixmap(QPixmap(":/images/space_shipB.png"));
 
+
 }
 
 void player::moveLeft(){

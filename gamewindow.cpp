@@ -1,5 +1,9 @@
 #include "gamewindow.h"
 #include "ui_gamewindow.h"
+#include "game.h"
+#include <QApplication>
+
+Game * game;
 
 gamewindow::gamewindow(QWidget *parent) :
     QDialog(parent),
@@ -28,6 +32,7 @@ void gamewindow::on_radioButton_2_toggled(bool checked)
 
 void gamewindow::on_pushButton_clicked()
 {
-    //function for ready
-    //game = new Game();
+
+   game = new Game();
+   game->show();
 }

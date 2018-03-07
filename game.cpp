@@ -89,7 +89,8 @@
             h4->setRect((1280-50-150)*(screen_breadth/1280),(850-275-25)*(screen_height/850),150*(screen_breadth/1280),25*(screen_height/850));
           ;
             QMediaPlayer * music = new QMediaPlayer();
-            music->setMedia(QUrl("qrc:/sounds/bullet/bullet.mp3"));
+            music->setMedia(QUrl("qrc:/sounds/starWarsBGM.mp3"));
+            music->play();
 
 
         // make the newly created scene the scene to visualize (since Game is a QGraphicsView Widget,
