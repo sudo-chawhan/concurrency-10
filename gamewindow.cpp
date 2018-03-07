@@ -3,6 +3,8 @@
 #include "game.h"
 #include "client.h"
 
+bool pressed=false;
+
 gamewindow::gamewindow(Client *client,QWidget *parent) :
     QDialog(parent),
     ui(new Ui::gamewindow)
@@ -32,6 +34,10 @@ void gamewindow::on_radioButton_2_toggled(bool checked)
 void gamewindow::on_pushButton_clicked()
 {
     //function for ready
-    qDebug()<<"ready messsage sent to client";
-    window_client->onReady();
+    if(!pressed){
+        qDebug()<<"ready messsage sent to client";
+        window_client->onReady();
+        pressed=true;
+    }
+
 }

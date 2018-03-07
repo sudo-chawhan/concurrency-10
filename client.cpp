@@ -9,9 +9,10 @@
 #include <QJsonObject>
 #include <typeinfo>
 #include "game.h"
+#include "score.h"
 
 Game *game;
-
+Score *score;
 Client::Client(QUrl url_local,QObject *parent){
     qDebug()<<"flags";
     flagA=new Flag(true);
@@ -45,6 +46,8 @@ Client::~Client(){
 
 void Client::onStart(){
     game = new Game(this);
+    score = new Score();
+    game->scene->addItem(score);
     game->scene->addItem(flagA);
     game->scene->addItem(flagB);
 }
@@ -108,28 +111,28 @@ void Client::onTextMessageReceived(QString message){
     else if(message.startsWith("takerA:")){
         qDebug()<<"flagA taken message recieved: "<<message;
         int m_id = message.mid(7,message.size()-7).toInt();
-        gameState->players.at(m_id)->setPixmap(QPixmap(":images/player.png"));
+        gameState->players.at(m_id)->setPixmap(QPixmap(":images/blue_playerwithredflag.png"));
         game->scene->removeItem(flagA);
     }
 
     else if(message.startsWith("takerB:")){
         qDebug()<<"flagB taken message recieved: "<<message;
         int m_id = message.mid(7,message.size()-7).toInt();
-        gameState->players.at(m_id)->setPixmap(QPixmap(":images/player.png"));
+        gameState->players.at(m_id)->setPixmap(QPixmap(":images/red_playerwithblueflag.png"));
         game->scene->removeItem(flagB);
     }
 
     else if(message.startsWith("dropA:")){
         qDebug()<<"flagA dropped message recieved: "<<message;
         int m_id = message.mid(6,message.size()-6).toInt();
-        gameState->players.at(m_id)->setPixmap(QPixmap(":images/space_shipB.png"));
+        gameState->players.at(m_id)->setPixmap(QPixmap(":images/blue_player.png"));
         game->scene->addItem(flagA);
     }
 
     else if(message.startsWith("dropB:")){
         qDebug()<<"flagB dropped message recieved: "<<message;
         int m_id = message.mid(6,message.size()-6).toInt();
-        gameState->players.at(m_id)->setPixmap(QPixmap(":images/space_shipA.png"));
+        gameState->players.at(m_id)->setPixmap(QPixmap(":images/red_player.png"));
         game->scene->addItem(flagB);
     }
 }
@@ -140,6 +143,12 @@ void Client::onBinaryMessageReceived(QByteArray bytes)
     qDebug()<<"from server...";
     //qDebug()<<doc.toJson();
     QJsonObject item=doc.object();
+    int scoreA = item["scoreA"].toInt();
+    int scoreB = item["scoreB"].toInt();
+    score->scoreA=scoreA;
+    score->scoreB=scoreB;
+    score->update_score();
+
     QJsonArray bulletArray = item["bullets"].toArray();
     QJsonArray playerArray = item["players"].toArray();
 

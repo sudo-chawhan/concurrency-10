@@ -55,6 +55,20 @@ Server::~Server()
 
 }
 
+void Server::onFlagScore_A()
+{
+    onFlagDropped_B();
+    qDebug()<<"score incremented a";
+    (gameState->score_a)++;
+}
+
+void Server::onFlagScore_B()
+{
+    onFlagDropped_A();
+    qDebug()<<"score incremented b";
+    (gameState->score_b)++;
+}
+
 void Server::startGameLoop(){
 
     qDebug()<<"sending start message to all the clients...";
@@ -169,15 +183,16 @@ void Server::onBinaryMessageFromClient(QByteArray message){
         ///below: returns whether flag taken or not
         bool flagTaken=gameState->players.at(id)->moveLeft();
         if(flagTaken==true){
-            gameState->players.at(id)->setPixmap(QPixmap(":images/player.png"));
             std::string take_messsage;
             if(gameState->players.at(id)->team) {
+                gameState->players.at(id)->setPixmap(QPixmap(":images/red_playerwithblueflag.png"));
                 takersIDB=id;
                 isFlagBTaken=true;
                 take_messsage="takerB:";
                 scene->removeItem(flagB);
             }
             else{
+                gameState->players.at(id)->setPixmap(QPixmap(":images/blue_playerwithredflag.png"));
                 isFlagATaken=true;
                 takersIDA=id;
                 take_messsage="takerA:";
@@ -195,15 +210,16 @@ void Server::onBinaryMessageFromClient(QByteArray message){
     if(key=="RIGHT"){
         bool flagTaken = gameState->players.at(id)->moveRight();
         if(flagTaken==true){
-            gameState->players.at(id)->setPixmap(QPixmap(":images/player.png"));
             std::string take_messsage;
             if(gameState->players.at(id)->team) {
+                gameState->players.at(id)->setPixmap(QPixmap(":images/red_playerwithblueflag.png"));
                 takersIDB=id;
                 isFlagBTaken=true;
                 take_messsage="takerB:";
                 scene->removeItem(flagB);
             }
             else{
+                gameState->players.at(id)->setPixmap(QPixmap(":images/blue_playerwithredflag.png"));
                 isFlagATaken=true;
                 takersIDA=id;
                 take_messsage="takerA:";
@@ -221,15 +237,16 @@ void Server::onBinaryMessageFromClient(QByteArray message){
     if(key=="UP"){
         bool flagTaken = gameState->players.at(id)->moveUp();
         if(flagTaken==true){
-            gameState->players.at(id)->setPixmap(QPixmap(":images/player.png"));
             std::string take_messsage;
             if(gameState->players.at(id)->team) {
+                gameState->players.at(id)->setPixmap(QPixmap(":images/red_playerwithblueflag.png"));
                 takersIDB=id;
                 isFlagBTaken=true;
                 take_messsage="takerB:";
                 scene->removeItem(flagB);
             }
             else{
+                gameState->players.at(id)->setPixmap(QPixmap(":images/blue_playerwithredflag.png"));
                 isFlagATaken=true;
                 takersIDA=id;
                 take_messsage="takerA:";
@@ -247,15 +264,16 @@ void Server::onBinaryMessageFromClient(QByteArray message){
     if(key=="DOWN"){
         bool flagTaken = gameState->players.at(id)->moveDown();
         if(flagTaken==true){
-            gameState->players.at(id)->setPixmap(QPixmap(":images/player.png"));
             std::string take_messsage;
             if(gameState->players.at(id)->team) {
+                gameState->players.at(id)->setPixmap(QPixmap(":images/red_playerwithblueflag.png"));
                 takersIDB=id;
                 isFlagBTaken=true;
                 take_messsage="takerB:";
                 scene->removeItem(flagB);
             }
             else{
+                gameState->players.at(id)->setPixmap(QPixmap(":images/blue_playerwithredflag.png"));
                 isFlagATaken=true;
                 takersIDA=id;
                 take_messsage="takerA:";

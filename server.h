@@ -23,6 +23,8 @@ public:
     explicit Server(quint16 port, QObject *parent = nullptr);
     virtual ~Server();
     GameState *gameState;
+    void onFlagScore_A();
+    void onFlagScore_B();
     void startGameLoop();
     void onFlagDropped_A();
     void onFlagDropped_B();

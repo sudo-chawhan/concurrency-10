@@ -16,7 +16,8 @@ private:
     int bullet_count=0;
 public:
     GameState();
-    int score[2]={0,0};
+    int score_a;
+    int score_b;
     std::vector<bullet*> bullets;
     std::vector<player*> players;
     void addBullet(bullet * new_bullet);

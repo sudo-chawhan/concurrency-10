@@ -6,3 +6,4 @@ extern QPoint start_a = QPoint(100,100);
 extern QPoint start_b = QPoint(screen_breadth-150,screen_height-150);
 extern QPoint flagPosA = QPoint(100,screen_height-150);
 extern QPoint flagPosB = QPoint(screen_breadth-150,100);
+

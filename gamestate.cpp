@@ -10,6 +10,7 @@ GameState::GameState()
 {
     bullets = std::vector<bullet*>();
     players = std::vector<player*>();
+    score_a=0;  score_b=0;
 
 }
 
@@ -52,8 +53,9 @@ bullet* GameState::createBullet(QString dir,bool team1, qreal x,qreal y)
 QJsonDocument GameState::getJsonDocFromGameState(){
 
     QJsonObject gamestate1;
-    gamestate1.insert("scoreA",score[0]);
-    gamestate1.insert("scoreB",score[1]);
+    if(score_a>0 || score_b>0) qDebug()<<"************json working right!";
+    gamestate1.insert("scoreA",score_a);
+    gamestate1.insert("scoreB",score_b);
         QJsonArray bulletArray;
 
             for(auto it = bullets.begin() ; it != bullets.end() ; it++)

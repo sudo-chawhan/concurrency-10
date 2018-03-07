@@ -10,5 +10,11 @@
         <file>bullet_blue.png</file>
         <file>bullet_red.png</file>
         <file>bg_spaceship.jpg</file>
+        <file>blue_flag.png</file>
+        <file>blue_player.png</file>
+        <file>blue_playerwithredflag.png</file>
+        <file>red_flag.png</file>
+        <file>red_player.png</file>
+        <file>red_playerwithblueflag.png</file>
     </qresource>
 </RCC>
