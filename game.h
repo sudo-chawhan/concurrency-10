@@ -14,7 +14,7 @@
 
 class Game{
 public:
-    Game(QWidget * parent=0);
+    Game(Client * client,QWidget * parent=0);
     QGraphicsScene * scene;
     InputHandler *view;
     player * team1;

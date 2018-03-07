@@ -10,7 +10,7 @@
 #include <typeinfo>
 #include "game.h"
 
-extern Game *game;
+Game *game;
 
 Client::Client(QUrl url_local,QObject *parent){
     qDebug()<<"flags";
@@ -41,6 +41,25 @@ void Client::onConnected(){
 
 Client::~Client(){
 
+}
+
+void Client::onStart(){
+    game = new Game(this);
+    game->scene->addItem(flagA);
+    game->scene->addItem(flagB);
+}
+
+void Client::onReady(){
+    std::string ready_message;
+
+    if(team)
+        ready_message="readyA:";
+    else
+        ready_message="readyB:";
+
+    ready_message+=std::to_string(main_id);
+    m_client_socket.sendTextMessage(QString::fromStdString(ready_message));
+    //qDebug()<<"init message sent to client #"<<playersConnected;
 }
 
 void Client::sendTextMessageToServer(QString message)
@@ -74,45 +93,40 @@ void Client::closed()
 }
 
 void Client::onTextMessageReceived(QString message){
-    // init := for assigning main id to the client
     qDebug()<<"server text message recieved";
-    if(message.startsWith("init:")){
+
+    if(message.startsWith("start")){
+        onStart();
+    }
+
+    else if(message.startsWith("init:")){
         qDebug()<<"init message recieved: "<<message;
         QString m_id = message.mid(5,message.size()-5);
         main_id=m_id.toInt();
-
-        game->scene->addItem(flagA);
-        game->scene->addItem(flagB);
-
-    ///// send ready to server
-        std::string init_messsage="ready:";
-        init_messsage+=std::to_string(main_id);
-        m_client_socket.sendTextMessage(QString::fromStdString(init_messsage));
-
     }
 
-    if(message.startsWith("takerA:")){
+    else if(message.startsWith("takerA:")){
         qDebug()<<"flagA taken message recieved: "<<message;
         int m_id = message.mid(7,message.size()-7).toInt();
         gameState->players.at(m_id)->setPixmap(QPixmap(":images/player.png"));
         game->scene->removeItem(flagA);
     }
 
-    if(message.startsWith("takerB:")){
+    else if(message.startsWith("takerB:")){
         qDebug()<<"flagB taken message recieved: "<<message;
         int m_id = message.mid(7,message.size()-7).toInt();
         gameState->players.at(m_id)->setPixmap(QPixmap(":images/player.png"));
         game->scene->removeItem(flagB);
     }
 
-    if(message.startsWith("dropA:")){
+    else if(message.startsWith("dropA:")){
         qDebug()<<"flagA dropped message recieved: "<<message;
         int m_id = message.mid(6,message.size()-6).toInt();
         gameState->players.at(m_id)->setPixmap(QPixmap(":images/space_shipB.png"));
         game->scene->addItem(flagA);
     }
 
-    if(message.startsWith("dropB:")){
+    else if(message.startsWith("dropB:")){
         qDebug()<<"flagB dropped message recieved: "<<message;
         int m_id = message.mid(6,message.size()-6).toInt();
         gameState->players.at(m_id)->setPixmap(QPixmap(":images/space_shipA.png"));

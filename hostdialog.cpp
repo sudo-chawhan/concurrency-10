@@ -1,6 +1,9 @@
 #include "hostdialog.h"
 #include "ui_hostdialog.h"
 #include <string>
+#include "server.h"
+
+extern Server *server;
 
 hostdialog::hostdialog(QString s,QWidget *parent) :
     QDialog(parent),
@@ -8,7 +11,7 @@ hostdialog::hostdialog(QString s,QWidget *parent) :
 {
     ui->setupUi(this);
     this->setWindowTitle("HOST WINDOW");
-    ui->label->setText("ENTER THE IP IN JOIN MENU :"+s);
+    ui->label->setText("Press ok to start!"+s);
 }
 
 hostdialog::~hostdialog()
@@ -18,6 +21,9 @@ hostdialog::~hostdialog()
 
 void hostdialog::on_pushButton_clicked()
 {
-    this->close();
-    ss =new serverScreen();
+    if(server->playersConnected==server->playersReady){
+        this->close();
+        server->startGameLoop();
+        ss =new serverScreen();
+    }
 }
