@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QGraphicsItem>
 #include "global.h"
+#include <QMediaPlayer>
 
 class player:public QObject, public QGraphicsPixmapItem{
     Q_OBJECT
@@ -15,6 +16,8 @@ public:
     void moveRight();
     void moveUp();
     void moveDown();
+private:
+    QMediaPlayer * bulletsound;
 };
 
 #endif // PLAYER_H

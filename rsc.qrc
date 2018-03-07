@@ -10,4 +10,11 @@
         <file>bullet_blue.png</file>
         <file>bullet_red.png</file>
     </qresource>
+    <qresource prefix="/sounds">
+        <file>bullet.mp3</file>
+        <file>blast.mp3</file>
+        <file>flagCap.mp3</file>
+        <file>bullet_wall.mp3</file>
+        <file>starWarsBGM.mp3</file>
+    </qresource>
 </RCC>

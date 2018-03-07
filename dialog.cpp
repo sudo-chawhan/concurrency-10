@@ -47,6 +47,7 @@ dialog::dialog(QWidget *parent)
 
  void dialog::make_client()
  {
+
     clientwindow *client=new clientwindow();
     client->show();
     this->hide();

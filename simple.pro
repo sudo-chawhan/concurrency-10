@@ -6,6 +6,7 @@
 
 QT       += core gui
 QT       += websockets
+QT       += multimedia
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -24,7 +25,6 @@ SOURCES += main.cpp \
     dialog.cpp \
     threadpool.cpp \
     serverscreen.cpp \
-    wall.cpp \
     hostdialog.cpp \
     clientwindow.cpp \
     gamewindow.cpp \
@@ -42,7 +42,6 @@ HEADERS  += \
     dialog.h \
     threadpool.h\
     serverscreen.h \
-    wall.h \
     global.h \
     hostdialog.h \
     clientwindow.h \
@@ -57,3 +56,5 @@ FORMS    += \
 
 RESOURCES += \
     rsc.qrc
+
+DISTFILES +=

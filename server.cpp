@@ -10,6 +10,7 @@
 #include "player.h"
 #include "player_teama.h"
 #include "player_teamb.h"
+#include <QMediaPlayer>
 
 #include <cstdio>
 using namespace std;
@@ -143,6 +144,9 @@ void Server::onBinaryMessageFromClient(QByteArray message){
     if(key=="W"||key=="A"||key=="S"||key=="D"){
         bullet *new_bullet = gameState->createBullet(key,gameState->players.at(id)->team,gameState->players.at(id)->pos().x()+25,gameState->players.at(id)->pos().y()+25);
         scene->addItem(new_bullet);
+        QMediaPlayer * music = new QMediaPlayer();
+        music->setMedia(QUrl("qrc:/sounds/bullet/bullet.mp3"));
+
     }
 
     QJsonDocument doc = gameState->getJsonDocFromGameState();

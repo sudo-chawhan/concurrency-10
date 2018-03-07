@@ -2,11 +2,11 @@
 #define GLOBAL_H
 #include <QPoint>
 
-extern int screen_breadth ;
-extern int screen_height;
-extern QPoint start_a ;
-extern QPoint start_b ;
-extern QPoint flagPosA ;
-extern QPoint flagPosB ;
+extern float screen_breadth ;
+extern float screen_height;
+extern QPointF start_a ;
+extern QPointF start_b ;
+extern QPointF flagPosA ;
+extern QPointF flagPosB ;
 
 #endif // GLOBAL_H
