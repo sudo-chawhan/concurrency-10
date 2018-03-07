@@ -3,6 +3,7 @@
 #include <QGraphicsPixmapItem>
 #include <QKeyEvent>
 #include <QDebug>
+#include <typeinfo>
 #include "bullet.h"
 #include "server.h"
 #include "dialog.h"
