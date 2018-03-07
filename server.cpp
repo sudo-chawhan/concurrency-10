@@ -142,10 +142,10 @@ void Server::onNewConnection()
     init_messsage+=std::to_string(playersConnected);
     pSocket->sendTextMessage(QString::fromStdString(init_messsage));
     qDebug()<<"init message sent to client #"<<playersConnected;
-
+    this->player_connected.lock();
     playersConnected++;
+    this->player_connected.unlock();
 
-//**************mutex signal
     scene->addItem(flagA);
     scene->addItem(flagB);
 
@@ -306,10 +306,9 @@ void Server::onTextMessageFromClient(const QString &message)
 
 
         QString m_id = message.mid(6,message.size()-6);
-///***********mutex wait
+        this->mutex_ready.lock();
         playersReady++;
-///***********mutex signal
-
+        this->mutex_ready.unlock();
 
 }
 
