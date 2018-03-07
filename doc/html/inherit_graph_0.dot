@@ -1,0 +1,31 @@
+digraph "Graphical Class Hierarchy"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="QGraphicsPixmapItem",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="bullet",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classbullet.html",tooltip="Simulates the bullet. "];
+  Node1 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="Flag",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_flag.html",tooltip="The Flag class. "];
+  Node1 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="player",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classplayer.html",tooltip="The player class. "];
+  Node4 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="player_teama",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classplayer__teama.html"];
+  Node4 -> Node6 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="player_teamb",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classplayer__teamb.html"];
+  Node7 [label="QGraphicsRectItem",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
+  Node7 -> Node8 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node8 [label="wall",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classwall.html"];
+  Node9 [label="QObject",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
+  Node9 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node9 -> Node10 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node10 [label="Client",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_client.html"];
+  Node9 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node9 -> Node11 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node11 [label="GameState",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_game_state.html",tooltip="The GameState class. "];
+  Node9 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node9 -> Node12 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node12 [label="Server",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_server.html",tooltip="The Server class. "];
+  Node9 -> Node8 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+}

@@ -1,0 +1,149 @@
+\hypertarget{class_game_state}{}\section{Game\+State Class Reference}
+\label{class_game_state}\index{Game\+State@{Game\+State}}
+
+
+The \hyperlink{class_game_state}{Game\+State} class.  
+
+
+
+
+{\ttfamily \#include $<$gamestate.\+h$>$}
+
+
+
+Inheritance diagram for Game\+State\+:
+% FIG 0
+
+
+Collaboration diagram for Game\+State\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_game_state_a4fa0a2bf50315c4a35a3890a0adcee5c}{Game\+State} ()\hypertarget{class_game_state_a4fa0a2bf50315c4a35a3890a0adcee5c}{}\label{class_game_state_a4fa0a2bf50315c4a35a3890a0adcee5c}
+
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_game_state}{Game\+State}. \end{DoxyCompactList}\item 
+void \hyperlink{class_game_state_a177a1737560a43cb59868c67c20a8c0c}{add\+Bullet} (\hyperlink{classbullet}{bullet} $\ast$new\+\_\+bullet)
+\begin{DoxyCompactList}\small\item\em add\+Bullet \end{DoxyCompactList}\item 
+void \hyperlink{class_game_state_ad5e3de1d73d145b5ecefbbbef003039e}{add\+Player} (\hyperlink{classplayer}{player} $\ast$new\+\_\+player)
+\begin{DoxyCompactList}\small\item\em add\+Player \end{DoxyCompactList}\item 
+void \hyperlink{class_game_state_a134fbf858b0d2bf7159ac32e1106fef3}{update\+Player} (int id, Q\+Point new\+\_\+pos)
+\begin{DoxyCompactList}\small\item\em can put mutex \end{DoxyCompactList}\item 
+\hyperlink{classbullet}{bullet} $\ast$ \hyperlink{class_game_state_aa2f6ea0dc7a423f875f0266da6b33dc3}{create\+Bullet} (Q\+String dir, bool team1, qreal x, qreal y)
+\begin{DoxyCompactList}\small\item\em create\+Bullet \end{DoxyCompactList}\item 
+Q\+Json\+Document \hyperlink{class_game_state_a9bc4de2fc56f9a29b386d7ef502e743d}{get\+Json\+Doc\+From\+Game\+State} ()
+\begin{DoxyCompactList}\small\item\em get\+Json\+Doc\+From\+Game\+State \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ \hyperlink{classbullet}{bullet} $\ast$ $>$ \hyperlink{class_game_state_a9acf975d22b52d65d1d428d52ab47084}{bullets}\hypertarget{class_game_state_a9acf975d22b52d65d1d428d52ab47084}{}\label{class_game_state_a9acf975d22b52d65d1d428d52ab47084}
+
+\begin{DoxyCompactList}\small\item\em bullets \end{DoxyCompactList}\item 
+std\+::vector$<$ \hyperlink{classplayer}{player} $\ast$ $>$ \hyperlink{class_game_state_a1d77ea380e7cd8c1b0dea24100eab3d4}{players}\hypertarget{class_game_state_a1d77ea380e7cd8c1b0dea24100eab3d4}{}\label{class_game_state_a1d77ea380e7cd8c1b0dea24100eab3d4}
+
+\begin{DoxyCompactList}\small\item\em players \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The \hyperlink{class_game_state}{Game\+State} class. 
+
+\subsection{Member Function Documentation}
+\index{Game\+State@{Game\+State}!add\+Bullet@{add\+Bullet}}
+\index{add\+Bullet@{add\+Bullet}!Game\+State@{Game\+State}}
+\subsubsection[{\texorpdfstring{add\+Bullet(bullet $\ast$new\+\_\+bullet)}{addBullet(bullet *new_bullet)}}]{\setlength{\rightskip}{0pt plus 5cm}void Game\+State\+::add\+Bullet (
+\begin{DoxyParamCaption}
+\item[{{\bf bullet} $\ast$}]{new\+\_\+bullet}
+\end{DoxyParamCaption}
+)}\hypertarget{class_game_state_a177a1737560a43cb59868c67c20a8c0c}{}\label{class_game_state_a177a1737560a43cb59868c67c20a8c0c}
+
+
+add\+Bullet 
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+\_\+bullet} & \\
+\hline
+\end{DoxyParams}
+\index{Game\+State@{Game\+State}!add\+Player@{add\+Player}}
+\index{add\+Player@{add\+Player}!Game\+State@{Game\+State}}
+\subsubsection[{\texorpdfstring{add\+Player(player $\ast$new\+\_\+player)}{addPlayer(player *new_player)}}]{\setlength{\rightskip}{0pt plus 5cm}void Game\+State\+::add\+Player (
+\begin{DoxyParamCaption}
+\item[{{\bf player} $\ast$}]{new\+\_\+player}
+\end{DoxyParamCaption}
+)}\hypertarget{class_game_state_ad5e3de1d73d145b5ecefbbbef003039e}{}\label{class_game_state_ad5e3de1d73d145b5ecefbbbef003039e}
+
+
+add\+Player 
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+\_\+player} & \\
+\hline
+\end{DoxyParams}
+\index{Game\+State@{Game\+State}!create\+Bullet@{create\+Bullet}}
+\index{create\+Bullet@{create\+Bullet}!Game\+State@{Game\+State}}
+\subsubsection[{\texorpdfstring{create\+Bullet(\+Q\+String dir, bool team1, qreal x, qreal y)}{createBullet(QString dir, bool team1, qreal x, qreal y)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf bullet} $\ast$ Game\+State\+::create\+Bullet (
+\begin{DoxyParamCaption}
+\item[{Q\+String}]{dir, }
+\item[{bool}]{team1, }
+\item[{qreal}]{x, }
+\item[{qreal}]{y}
+\end{DoxyParamCaption}
+)}\hypertarget{class_game_state_aa2f6ea0dc7a423f875f0266da6b33dc3}{}\label{class_game_state_aa2f6ea0dc7a423f875f0266da6b33dc3}
+
+
+create\+Bullet 
+
+
+\begin{DoxyParams}{Parameters}
+{\em dir} & \\
+\hline
+{\em team1} & \\
+\hline
+{\em x} & \\
+\hline
+{\em y} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\index{Game\+State@{Game\+State}!get\+Json\+Doc\+From\+Game\+State@{get\+Json\+Doc\+From\+Game\+State}}
+\index{get\+Json\+Doc\+From\+Game\+State@{get\+Json\+Doc\+From\+Game\+State}!Game\+State@{Game\+State}}
+\subsubsection[{\texorpdfstring{get\+Json\+Doc\+From\+Game\+State()}{getJsonDocFromGameState()}}]{\setlength{\rightskip}{0pt plus 5cm}Q\+Json\+Document Game\+State\+::get\+Json\+Doc\+From\+Game\+State (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{class_game_state_a9bc4de2fc56f9a29b386d7ef502e743d}{}\label{class_game_state_a9bc4de2fc56f9a29b386d7ef502e743d}
+
+
+get\+Json\+Doc\+From\+Game\+State 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\index{Game\+State@{Game\+State}!update\+Player@{update\+Player}}
+\index{update\+Player@{update\+Player}!Game\+State@{Game\+State}}
+\subsubsection[{\texorpdfstring{update\+Player(int id, Q\+Point new\+\_\+pos)}{updatePlayer(int id, QPoint new_pos)}}]{\setlength{\rightskip}{0pt plus 5cm}void Game\+State\+::update\+Player (
+\begin{DoxyParamCaption}
+\item[{int}]{id, }
+\item[{Q\+Point}]{new\+\_\+pos}
+\end{DoxyParamCaption}
+)}\hypertarget{class_game_state_a134fbf858b0d2bf7159ac32e1106fef3}{}\label{class_game_state_a134fbf858b0d2bf7159ac32e1106fef3}
+
+
+can put mutex 
+
+update\+Player 
+\begin{DoxyParams}{Parameters}
+{\em id} & \\
+\hline
+{\em new\+\_\+pos} & \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/siddharth/\+Desktop/popl/gamestate.\+h\item 
+/home/siddharth/\+Desktop/popl/gamestate.\+cpp\end{DoxyCompactItemize}
