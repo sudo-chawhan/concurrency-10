@@ -132,8 +132,6 @@ void Client::onTextMessageReceived(QString message){
         gameState->players.at(m_id)->setPixmap(QPixmap(":images/space_shipA.png"));
         game->scene->addItem(flagB);
     }
-
-
 }
 
 void Client::onBinaryMessageReceived(QByteArray bytes)

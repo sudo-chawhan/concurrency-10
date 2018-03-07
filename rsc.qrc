@@ -9,5 +9,6 @@
         <file>space_shipB.png</file>
         <file>bullet_blue.png</file>
         <file>bullet_red.png</file>
+        <file>bg_spaceship.jpg</file>
     </qresource>
 </RCC>

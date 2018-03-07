@@ -59,10 +59,12 @@ Server::~Server()
 
 void Server::startGameLoop(){
 
+    qDebug()<<"sending start message to all the clients...";
     for (QList<QWebSocket*>::iterator i = m_clients.begin(); i != m_clients.end(); i++)
     {
           (*i)->sendTextMessage(QString::fromStdString("start"));
     }
+    qDebug()<<"sent start message to all the clients";
 
     QTimer * timer = new QTimer(this);
     connect(timer,SIGNAL(timeout()),this,SLOT(sendGameStateToClients()));
