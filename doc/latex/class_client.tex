@@ -1,0 +1,133 @@
+\hypertarget{class_client}{}\section{Client Class Reference}
+\label{class_client}\index{Client@{Client}}
+
+
+Inheritance diagram for Client\+:
+% FIG 0
+
+
+Collaboration diagram for Client\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_client_afa3b3e88df2f4ae65279e8a5a5f45ce5}{Client} (Q\+Url url\+\_\+local, Q\+Object $\ast$parent=nullptr)
+\begin{DoxyCompactList}\small\item\em constructor \end{DoxyCompactList}\item 
+virtual \hyperlink{class_client_a840e519ca781888cbd54181572ebe3a7}{$\sim$\+Client} ()\hypertarget{class_client_a840e519ca781888cbd54181572ebe3a7}{}\label{class_client_a840e519ca781888cbd54181572ebe3a7}
+
+\begin{DoxyCompactList}\small\item\em destructor \end{DoxyCompactList}\item 
+void \hyperlink{class_client_a1aa5fef5094191fd7cdd6b5c15732c0e}{send\+Text\+Message\+To\+Server} (Q\+String message)
+\begin{DoxyCompactList}\small\item\em Sends message to server in the form of Q\+Sting. \end{DoxyCompactList}\item 
+void \hyperlink{class_client_ac7ece460fde6a00764881948666642bd}{send\+Binary\+Message\+To\+Server} (Q\+Byte\+Array message)
+\begin{DoxyCompactList}\small\item\em Sends message to server in the form of Q\+Byte\+Array. \end{DoxyCompactList}\item 
+int \hyperlink{class_client_a86df5016c5324b5b7d8e5918f8df3b4d}{check\+Bullet} (Q\+Json\+Array bullet\+Array, int id)
+\begin{DoxyCompactList}\small\item\em Check whether given id bullet is present in Json object. \end{DoxyCompactList}\item 
+void \hyperlink{class_client_a1db86ef88630bbb83901a5cd78568a1f}{on\+Ready} ()\hypertarget{class_client_a1db86ef88630bbb83901a5cd78568a1f}{}\label{class_client_a1db86ef88630bbb83901a5cd78568a1f}
+
+\begin{DoxyCompactList}\small\item\em Sends message to server on connection of every new client. \end{DoxyCompactList}\item 
+void \hyperlink{class_client_aa9be1e9104a9fe60f89fd727b15a4fd3}{on\+Start} ()\hypertarget{class_client_aa9be1e9104a9fe60f89fd727b15a4fd3}{}\label{class_client_aa9be1e9104a9fe60f89fd727b15a4fd3}
+
+\begin{DoxyCompactList}\small\item\em Adds flag at the start of game. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_flag}{Flag} $\ast$ \hyperlink{class_client_ad2cd0bb4fa66af68764cafe6a57a4ef0}{flagA}\hypertarget{class_client_ad2cd0bb4fa66af68764cafe6a57a4ef0}{}\label{class_client_ad2cd0bb4fa66af68764cafe6a57a4ef0}
+
+\begin{DoxyCompactList}\small\item\em flag object of team A \end{DoxyCompactList}\item 
+\hyperlink{class_flag}{Flag} $\ast$ \hyperlink{class_client_af278654fb2b57c88268fdf1abcf3d148}{flagB}\hypertarget{class_client_af278654fb2b57c88268fdf1abcf3d148}{}\label{class_client_af278654fb2b57c88268fdf1abcf3d148}
+
+\begin{DoxyCompactList}\small\item\em flag object of team B \end{DoxyCompactList}\item 
+bool \hyperlink{class_client_a6166f3ac78f8d5d129e7d399c7fec6d1}{team}\hypertarget{class_client_a6166f3ac78f8d5d129e7d399c7fec6d1}{}\label{class_client_a6166f3ac78f8d5d129e7d399c7fec6d1}
+
+\begin{DoxyCompactList}\small\item\em true for team A else false \end{DoxyCompactList}\item 
+\hyperlink{class_game_state}{Game\+State} $\ast$ \hyperlink{class_client_a3f83510cc4a7fdb031ffec0525947769}{game\+State}\hypertarget{class_client_a3f83510cc4a7fdb031ffec0525947769}{}\label{class_client_a3f83510cc4a7fdb031ffec0525947769}
+
+\begin{DoxyCompactList}\small\item\em variable storing state of game at any time \end{DoxyCompactList}\item 
+int \hyperlink{class_client_a742a83ff0e57b4a621369a293151eec5}{main\+\_\+id}\hypertarget{class_client_a742a83ff0e57b4a621369a293151eec5}{}\label{class_client_a742a83ff0e57b4a621369a293151eec5}
+
+\begin{DoxyCompactList}\small\item\em main\+\_\+id \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Client@{Client}!Client@{Client}}
+\index{Client@{Client}!Client@{Client}}
+\subsubsection[{\texorpdfstring{Client(\+Q\+Url url\+\_\+local, Q\+Object $\ast$parent=nullptr)}{Client(QUrl url_local, QObject *parent=nullptr)}}]{\setlength{\rightskip}{0pt plus 5cm}Client\+::\+Client (
+\begin{DoxyParamCaption}
+\item[{Q\+Url}]{url\+\_\+local, }
+\item[{Q\+Object $\ast$}]{parent = {\ttfamily nullptr}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [explicit]}}\hypertarget{class_client_afa3b3e88df2f4ae65279e8a5a5f45ce5}{}\label{class_client_afa3b3e88df2f4ae65279e8a5a5f45ce5}
+
+
+constructor 
+
+
+\begin{DoxyParams}{Parameters}
+{\em url\+\_\+local} & \+:ip address \\
+\hline
+{\em parent} & \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\index{Client@{Client}!check\+Bullet@{check\+Bullet}}
+\index{check\+Bullet@{check\+Bullet}!Client@{Client}}
+\subsubsection[{\texorpdfstring{check\+Bullet(\+Q\+Json\+Array bullet\+Array, int id)}{checkBullet(QJsonArray bulletArray, int id)}}]{\setlength{\rightskip}{0pt plus 5cm}int Client\+::check\+Bullet (
+\begin{DoxyParamCaption}
+\item[{Q\+Json\+Array}]{bullet\+Array, }
+\item[{int}]{id}
+\end{DoxyParamCaption}
+)}\hypertarget{class_client_a86df5016c5324b5b7d8e5918f8df3b4d}{}\label{class_client_a86df5016c5324b5b7d8e5918f8df3b4d}
+
+
+Check whether given id bullet is present in Json object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em bullet\+Array} & \+:Array of bullet in Q\+Json \\
+\hline
+{\em id} & \+:unique id \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\+:int 
+\end{DoxyReturn}
+\index{Client@{Client}!send\+Binary\+Message\+To\+Server@{send\+Binary\+Message\+To\+Server}}
+\index{send\+Binary\+Message\+To\+Server@{send\+Binary\+Message\+To\+Server}!Client@{Client}}
+\subsubsection[{\texorpdfstring{send\+Binary\+Message\+To\+Server(\+Q\+Byte\+Array message)}{sendBinaryMessageToServer(QByteArray message)}}]{\setlength{\rightskip}{0pt plus 5cm}void Client\+::send\+Binary\+Message\+To\+Server (
+\begin{DoxyParamCaption}
+\item[{Q\+Byte\+Array}]{message}
+\end{DoxyParamCaption}
+)}\hypertarget{class_client_ac7ece460fde6a00764881948666642bd}{}\label{class_client_ac7ece460fde6a00764881948666642bd}
+
+
+Sends message to server in the form of Q\+Byte\+Array. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em message} & \+:Qbytearray to server \\
+\hline
+\end{DoxyParams}
+\index{Client@{Client}!send\+Text\+Message\+To\+Server@{send\+Text\+Message\+To\+Server}}
+\index{send\+Text\+Message\+To\+Server@{send\+Text\+Message\+To\+Server}!Client@{Client}}
+\subsubsection[{\texorpdfstring{send\+Text\+Message\+To\+Server(\+Q\+String message)}{sendTextMessageToServer(QString message)}}]{\setlength{\rightskip}{0pt plus 5cm}void Client\+::send\+Text\+Message\+To\+Server (
+\begin{DoxyParamCaption}
+\item[{Q\+String}]{message}
+\end{DoxyParamCaption}
+)}\hypertarget{class_client_a1aa5fef5094191fd7cdd6b5c15732c0e}{}\label{class_client_a1aa5fef5094191fd7cdd6b5c15732c0e}
+
+
+Sends message to server in the form of Q\+Sting. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em message} & \+:Q\+String to server \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/siddharth/\+Desktop/popl/client.\+h\item 
+/home/siddharth/\+Desktop/popl/client.\+cpp\end{DoxyCompactItemize}

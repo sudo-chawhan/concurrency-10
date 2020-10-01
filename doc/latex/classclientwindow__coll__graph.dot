@@ -1,0 +1,23 @@
+digraph "clientwindow"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="clientwindow",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+  Node2 -> Node1 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node2 [label="QDialog",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
+  Node3 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" game_selection" ];
+  Node3 [label="gamewindow",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classgamewindow.html",tooltip="The gamewindow class. "];
+  Node2 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node4 -> Node3 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" window_client" ];
+  Node4 [label="Client",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_client.html"];
+  Node5 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node5 [label="QObject",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
+  Node6 -> Node4 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" flagA\nflagB" ];
+  Node6 [label="Flag",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_flag.html",tooltip="The Flag class. "];
+  Node5 -> Node6 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node7 -> Node6 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node7 [label="QGraphicsPixmapItem",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
+  Node8 -> Node4 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" gameState" ];
+  Node8 [label="GameState",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_game_state.html",tooltip="The GameState class. "];
+  Node5 -> Node8 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+}

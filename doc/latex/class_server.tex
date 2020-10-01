@@ -1,0 +1,67 @@
+\hypertarget{class_server}{}\section{Server Class Reference}
+\label{class_server}\index{Server@{Server}}
+
+
+The \hyperlink{class_server}{Server} class.  
+
+
+
+
+{\ttfamily \#include $<$server.\+h$>$}
+
+
+
+Inheritance diagram for Server\+:
+% FIG 0
+
+
+Collaboration diagram for Server\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Server} (quint16 port, Q\+Object $\ast$parent=nullptr)\hypertarget{class_server_aa41f7ac2f58d192ffc4b7ffdcfdc83ff}{}\label{class_server_aa41f7ac2f58d192ffc4b7ffdcfdc83ff}
+
+\item 
+void {\bfseries start\+Game\+Loop} ()\hypertarget{class_server_a2d32bea48ed9aff99f0ecb8277d05400}{}\label{class_server_a2d32bea48ed9aff99f0ecb8277d05400}
+
+\item 
+void {\bfseries on\+Flag\+Dropped\+\_\+A} ()\hypertarget{class_server_abefe3e8e3b6a182aae6d09e790f719cb}{}\label{class_server_abefe3e8e3b6a182aae6d09e790f719cb}
+
+\item 
+void {\bfseries on\+Flag\+Dropped\+\_\+B} ()\hypertarget{class_server_a8d7bc4d1128a12ccb9f3801277678460}{}\label{class_server_a8d7bc4d1128a12ccb9f3801277678460}
+
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{class_server_a6e14276d850e50c574dda1fe5954afb0}{players\+Ready} =0\hypertarget{class_server_a6e14276d850e50c574dda1fe5954afb0}{}\label{class_server_a6e14276d850e50c574dda1fe5954afb0}
+
+\begin{DoxyCompactList}\small\item\em players\+Ready \end{DoxyCompactList}\item 
+int \hyperlink{class_server_a4cdd8e1812e08357287c75cf60964f96}{players\+Connected} =0\hypertarget{class_server_a4cdd8e1812e08357287c75cf60964f96}{}\label{class_server_a4cdd8e1812e08357287c75cf60964f96}
+
+\begin{DoxyCompactList}\small\item\em players\+Connected \end{DoxyCompactList}\item 
+\hyperlink{class_flag}{Flag} $\ast$ \hyperlink{class_server_a579633604bb0c1630b982b3685aef6ba}{flagA}\hypertarget{class_server_a579633604bb0c1630b982b3685aef6ba}{}\label{class_server_a579633604bb0c1630b982b3685aef6ba}
+
+\begin{DoxyCompactList}\small\item\em flagA \end{DoxyCompactList}\item 
+\hyperlink{class_flag}{Flag} $\ast$ \hyperlink{class_server_aca03e61e39d547fd62c09d5a23ba01c0}{flagB}\hypertarget{class_server_aca03e61e39d547fd62c09d5a23ba01c0}{}\label{class_server_aca03e61e39d547fd62c09d5a23ba01c0}
+
+\begin{DoxyCompactList}\small\item\em flagB \end{DoxyCompactList}\item 
+\hyperlink{class_game_state}{Game\+State} $\ast$ {\bfseries game\+State}\hypertarget{class_server_a8d87d2ea9fec371d2ff0c644b7b5828e}{}\label{class_server_a8d87d2ea9fec371d2ff0c644b7b5828e}
+
+\item 
+std\+::mutex {\bfseries mutex\+\_\+ready}\hypertarget{class_server_a84657db7d762d14229c0ac6a6543f25a}{}\label{class_server_a84657db7d762d14229c0ac6a6543f25a}
+
+\item 
+std\+::mutex {\bfseries player\+\_\+connected}\hypertarget{class_server_ae5c7d94be60aee25c7625618df3f9be3}{}\label{class_server_ae5c7d94be60aee25c7625618df3f9be3}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The \hyperlink{class_server}{Server} class. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/siddharth/\+Desktop/popl/server.\+h\item 
+/home/siddharth/\+Desktop/popl/server.\+cpp\end{DoxyCompactItemize}

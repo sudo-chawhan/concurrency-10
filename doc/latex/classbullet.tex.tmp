@@ -1,0 +1,98 @@
+\hypertarget{classbullet}{}\section{bullet Class Reference}
+\label{classbullet}\index{bullet@{bullet}}
+
+
+Simulates the bullet.  
+
+
+
+
+{\ttfamily \#include $<$bullet.\+h$>$}
+
+
+
+Inheritance diagram for bullet\+:
+% FIG 0
+
+
+Collaboration diagram for bullet\+:
+% FIG 1
+\subsection*{Public Slots}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classbullet_a3bdb1b2baf6d20f30c573baf52a09cc4}{move} ()
+\begin{DoxyCompactList}\small\item\em simulates the movement of bullet \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classbullet_a1d8190bc5648d720ab6176ff5c2baecf}{delete\+\_\+bullet} ()\hypertarget{classbullet_a1d8190bc5648d720ab6176ff5c2baecf}{}\label{classbullet_a1d8190bc5648d720ab6176ff5c2baecf}
+
+\begin{DoxyCompactList}\small\item\em Removes bullet the scene. \end{DoxyCompactList}\item 
+\hyperlink{classbullet_a5704add3e5824edeaa7caf0a7b694007}{bullet} (\hyperlink{namespaceenums_a7ff51311a3534659d8a22816d0723d63}{enums\+::direc} dirc, int \hyperlink{classbullet_a07313a2a11ad417535ec8aa6c4ac8b24}{id}, bool team1, Q\+Graphics\+Item $\ast$parent=0)
+\begin{DoxyCompactList}\small\item\em constructor \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{classbullet_a80e4a126d8f8f93c9d484efb2622574d}{team}\hypertarget{classbullet_a80e4a126d8f8f93c9d484efb2622574d}{}\label{classbullet_a80e4a126d8f8f93c9d484efb2622574d}
+
+\begin{DoxyCompactList}\small\item\em true if team=A \end{DoxyCompactList}\item 
+\hyperlink{namespaceenums_a7ff51311a3534659d8a22816d0723d63}{enums\+::direc} \hyperlink{classbullet_a951eaf06a5c1524b32297e4d886f7839}{dir}\hypertarget{classbullet_a951eaf06a5c1524b32297e4d886f7839}{}\label{classbullet_a951eaf06a5c1524b32297e4d886f7839}
+
+\begin{DoxyCompactList}\small\item\em E\+N\+UM to store the keypress events. \end{DoxyCompactList}\item 
+int \hyperlink{classbullet_a07313a2a11ad417535ec8aa6c4ac8b24}{id}\hypertarget{classbullet_a07313a2a11ad417535ec8aa6c4ac8b24}{}\label{classbullet_a07313a2a11ad417535ec8aa6c4ac8b24}
+
+\begin{DoxyCompactList}\small\item\em unique identifier \end{DoxyCompactList}\item 
+bool \hyperlink{classbullet_a4524564a7326c29c43161108b0dfbb70}{is\+\_\+server}\hypertarget{classbullet_a4524564a7326c29c43161108b0dfbb70}{}\label{classbullet_a4524564a7326c29c43161108b0dfbb70}
+
+\begin{DoxyCompactList}\small\item\em differentiate btw move function of server and client \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Simulates the bullet. 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{bullet@{bullet}!bullet@{bullet}}
+\index{bullet@{bullet}!bullet@{bullet}}
+\subsubsection[{\texorpdfstring{bullet(enums\+::direc dirc, int id, bool team1, Q\+Graphics\+Item $\ast$parent=0)}{bullet(enums::direc dirc, int id, bool team1, QGraphicsItem *parent=0)}}]{\setlength{\rightskip}{0pt plus 5cm}bullet\+::bullet (
+\begin{DoxyParamCaption}
+\item[{{\bf enums\+::direc}}]{dirc, }
+\item[{int}]{id, }
+\item[{bool}]{team1, }
+\item[{Q\+Graphics\+Item $\ast$}]{parent = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\hypertarget{classbullet_a5704add3e5824edeaa7caf0a7b694007}{}\label{classbullet_a5704add3e5824edeaa7caf0a7b694007}
+
+
+constructor 
+
+
+\begin{DoxyParams}{Parameters}
+{\em dirc} & \+:enum to show direction of bullet fired \\
+\hline
+{\em id} & \+:unique id of bullet \\
+\hline
+{\em team1} & \+:team A or N\+OT \\
+\hline
+{\em parent} & \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\index{bullet@{bullet}!move@{move}}
+\index{move@{move}!bullet@{bullet}}
+\subsubsection[{\texorpdfstring{move}{move}}]{\setlength{\rightskip}{0pt plus 5cm}void bullet\+::move (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [slot]}}\hypertarget{classbullet_a3bdb1b2baf6d20f30c573baf52a09cc4}{}\label{classbullet_a3bdb1b2baf6d20f30c573baf52a09cc4}
+
+
+simulates the movement of bullet 
+
+q\+Debug()$<$$<$\char`\"{}is server!\char`\"{}; 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/siddharth/\+Desktop/popl/bullet.\+h\item 
+/home/siddharth/\+Desktop/popl/bullet.\+cpp\end{DoxyCompactItemize}
