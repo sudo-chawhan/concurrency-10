@@ -1,17 +1,64 @@
 #ifndef PLAYER_H
 #define PLAYER_H
-
 #include <QGraphicsPixmapItem>
 #include <QObject>
+#include <QGraphicsItem>
+#include "global.h"
 
-class Player:public QObject, public QGraphicsPixmapItem{
+
+/**
+ * @brief The player class
+ */
+class player:public QObject, public QGraphicsPixmapItem{
     Q_OBJECT
 public:
-    bool boost_p;
-//    int count_p=10;
-    void keyPressEvent(QKeyEvent *keyEvent);
-public slots:
-    void create_enemy();
+
+    /**
+     * @brief player
+     * @param id
+     * @param team1
+     * @param parent
+     */
+    player(int id,bool team1,QGraphicsItem * parent=0);
+
+    /**
+     * @brief team
+     */
+    bool team;
+
+    /**
+     * @brief id
+     */
+    int id;
+
+    /**
+     * @brief moveLeft
+     * @return
+     */
+    bool moveLeft();
+
+    /**
+     * @brief moveRight
+     * @return
+     */
+    bool moveRight();
+
+    /**
+     * @brief moveUp
+     * @return
+     */
+    bool moveUp();
+
+    /**
+     * @brief moveDown
+     * @return
+     */
+    bool moveDown();
+
+    /**
+     * @brief respawn
+     */
+    void respawn();
 };
 
-#endif // MYRECT_H
+#endif // PLAYER_H

@@ -1,16 +1,25 @@
 #include <QApplication>
 #include "game.h"
-#include <time.h>
-time_t start;
-Game *game;
+#include "server.h"
+#include "dialog.h"
 
-int main(int argc, char *argv[])
-{
+
+
+int main(int argc, char *argv[]){
     QApplication a(argc, argv);
-    start=time(0);
-    game = new Game();
 
+    //server= new Server(3000);
+
+    //Server *ser = new Server(3000);
+
+    //game = new Game();
     //game->show();
+    //mainwindow window;
+    //window.show();
+    dialog dialog1;
+    dialog1.resize(500, 500);
+    dialog1.show();
+
 
     return a.exec();
 }

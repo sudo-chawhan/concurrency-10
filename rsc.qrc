@@ -1,0 +1,14 @@
+<RCC>
+    <qresource prefix="/images">
+        <file>download.jpeg</file>
+        <file>maxresdefault.jpg</file>
+        <file>ye.png</file>
+        <file>bullet.png</file>
+        <file>player.png</file>
+        <file>space_shipA.png</file>
+        <file>space_shipB.png</file>
+        <file>bullet_blue.png</file>
+        <file>bullet_red.png</file>
+        <file>bg_spaceship.jpg</file>
+    </qresource>
+</RCC>
